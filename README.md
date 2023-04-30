@@ -1,12 +1,13 @@
-### Hi there 👋, Demo Day 
-#### Alina Inchaustegui's Demo Day Project
-Yoga App 
+## Installation
 
-Skills: NODE.JS / REACT / JS / HTML / CSS / EXPRESS
+1. Clone repo
+2. run `npm install`
 
-- 🔭 I’m currently working on this page. 
+## Usage
 
+1. run `node server.js`
+2. Navigate to `localhost:8080`
 
+## Credit
 
-
-
+Modified from Scotch.io's auth tutorial
