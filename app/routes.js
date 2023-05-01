@@ -27,35 +27,46 @@ module.exports = function(app, passport, db) {
         res.redirect('/');
     });
 
+    app.get('/tracker', isLoggedIn, function(req, res) {
+        db.collection('tracker').find().toArray((err, result) => {
+          if (err) return console.log(err)
+          console.log(result)
+          res.render('tracker.ejs', {
+            user : req.user,
+            tracker: result
+          })
+        })
+    });
+
 // message board routes ===============================================================
     //matching route for the form action in profile.ejs
-    app.post('/messages', (req, res) => {
-      db.collection('messages').save({book: req.body.book, reviews: []}, (err, result) => {
+    app.post('/tracker', (req, res) => {
+      db.collection('tracker').save({log: req.body.log, msg: req.body.msg}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
-        res.redirect('/profile')
+        res.redirect('/tracker')
       })
     })
 
     //.put is sent by the fetch req in the main.js 
     //find one book from the database and update its reviews
-    app.post('/reviews', (req, res) => {
+    app.put('/tracker', (req, res) => {
       console.log(req.body)
-      db.collection('messages')
-      .findOneAndUpdate({book: req.body.book}, {
-        $push: {
-          reviews: {text: req.body.text, stars: Number(req.body.stars)} 
+      db.collection('tracker')
+      .findOneAndUpdate({log: req.body.log}, {
+        $set: {
+          msg: req.body.msg
         }
       }, {
         sort: {_id: -1},
       }, (err, result) => {
         if (err) return res.send(err)
-        res.redirect('/profile')
+        res.redirect('/tracker')
       })
     })
     
-    app.delete('/messages', (req, res) => {
-      db.collection('messages').findOneAndDelete({book: req.body.book}, (err, result) => {
+    app.delete('/tracker', (req, res) => {
+      db.collection('tracker').findOneAndDelete({log: req.body.log}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
