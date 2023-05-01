@@ -55,14 +55,14 @@ Array.from(thumbDown).forEach(function (element) {
 
 Array.from(trash).forEach(function (element) {
   element.addEventListener('click', function () {
-    const book = this.parentNode.parentNode.childNodes[1].innerText
-    fetch('messages', {
+    const log = this.parentNode.parentNode.childNodes[1].innerText
+    fetch('tracker', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'book': book,
+        'log': log,
         
       })
     }).then(function (response) {

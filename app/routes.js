@@ -41,7 +41,7 @@ module.exports = function(app, passport, db) {
 // message board routes ===============================================================
     //matching route for the form action in profile.ejs
     app.post('/tracker', (req, res) => {
-      db.collection('tracker').save({log: req.body.log, msg: req.body.msg}, (err, result) => {
+      db.collection('tracker').save({log: req.body.log, date: req.body.date}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/tracker')
@@ -66,7 +66,7 @@ module.exports = function(app, passport, db) {
     })
     
     app.delete('/tracker', (req, res) => {
-      db.collection('tracker').findOneAndDelete({log: req.body.log}, (err, result) => {
+      db.collection('tracker').findOneAndDelete({log: req.body.log, date: req.body.date}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
