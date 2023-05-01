@@ -1,4 +1,4 @@
-module.exports = function(app, passport, db) {
+module.exports = function(app, passport, db, mongodb) {
 //require gets replaced by this function ^^^^
 // normal routes ===============================================================
 
@@ -65,10 +65,11 @@ module.exports = function(app, passport, db) {
       })
     })
     
-    app.delete('/tracker', (req, res) => {
-      db.collection('tracker').findOneAndDelete({log: req.body.log, date: req.body.date}, (err, result) => {
+    app.delete('/deleteTracker/:id', (req, res) => {
+      console.log(req.params.id)
+      db.collection('tracker').findOneAndDelete({_id:mongodb.ObjectId(req.params.id)}, (err, result) => {
         if (err) return res.send(500, err)
-        res.send('Message deleted!')
+        res.redirect('/tracker')
       })
     })
 

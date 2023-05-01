@@ -6,10 +6,11 @@ var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 1111;
 const MongoClient = require('mongodb').MongoClient
+const mongodb = require('mongodb')
 var mongoose = require('mongoose'); //has schemas. layer on top of mongodb
 var passport = require('passport');
 var flash    = require('connect-flash');
-
+const methodOverride = require('method-override')
 var morgan       = require('morgan'); //packagae that logs all reqs
 var cookieParser = require('cookie-parser');//enables us to look at cookies (helps stay logged in)
 var bodyParser   = require('body-parser');//get info from html forms
@@ -25,7 +26,7 @@ var db
 mongoose.connect(configDB.url, (err, database) => {
   if (err) return console.log(err)
   db = database
-  require('./app/routes.js')(app, passport, db);
+  require('./app/routes.js')(app, passport, db, mongodb);
 }); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration. 2nd passport runs the func
@@ -39,7 +40,7 @@ app.use(express.static('public'))
 
 
 app.set('view engine', 'ejs'); // set up ejs for templating
-
+app.use(methodOverride('_method'))
 // required for passport
 app.use(session({
     secret: 'rcbootcamp2023a', // session secret
