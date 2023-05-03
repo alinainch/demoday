@@ -2,6 +2,7 @@
   margin:0;
   padding:0;
   font-family: 'Arvo';
+  box-sizing: border-box;
 }
 
 body{
@@ -110,3 +111,19 @@ h1{
   margin: 0px;
 }
 
+.dailySquares{
+  display: flex;
+  flex-wrap: wrap;
+  width: 210px;
+  /* because if the box is 30px*30px and we want 7 rows we need 30*7 */
+
+}
+.square{
+  border: 1px solid black;
+  height: 30px;
+  width: 30px;
+}
+
+.squareComplete{
+  background: green;
+}

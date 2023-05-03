@@ -77,7 +77,17 @@
   <div class="alert alert-info" role="alert">
     Mindful Yogi is a comprehensive yoga and fitness app that allows you to log your daily exercises, save yoga practice videos, connect with friends, find local yoga studios, and track your daily exercise progress.
   </div>
-  
+
+  <section class="dailySquares">
+    <%for(let i=0; i < 31; i++){ %>
+      <section class="square <%if(i % 2 == 0){ %>squareComplete<% } %>"></section>
+    <% } %>  
+  </section>
+
+  <form action="">
+    <input type="date" name="date" id="">
+    <input type="submit" name="submit" id="">
+  </form>
  
 
 <script src="https://cdn.tailwindcss.com"></script>
