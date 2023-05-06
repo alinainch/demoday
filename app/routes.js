@@ -9,12 +9,12 @@ module.exports = function(app, passport, db, mongodb) {
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('messages').find().toArray((err, result) => {
+        db.collection('tracker').find({userID: req.user._id}).toArray((err, result) => {
           if (err) return console.log(err)
           console.log(result)
           res.render('profile.ejs', {
             user : req.user,
-            messages: result
+            trackerLogs: result
           })
         })
     });
@@ -41,7 +41,7 @@ module.exports = function(app, passport, db, mongodb) {
 // message board routes ===============================================================
     //matching route for the form action in profile.ejs
     app.post('/tracker', (req, res) => {
-      db.collection('tracker').save({log: req.body.log, date: req.body.date}, (err, result) => {
+      db.collection('tracker').save({userID: req.user._id, log: req.body.log, date: new Date(req.body.date)}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/tracker')
