@@ -21,17 +21,17 @@
       </h1>
       </div>
   </header>
-  <!-- <div class="drawer drawer-mobile">
+  <div class="drawer drawer-mobile">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content flex flex-col items-center justify-center"> -->
       <!-- Page content here -->
-      <!-- <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Navigate</label>
+      <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Navigate</label>
     </div> 
     <div class="drawer-side">
       <label for="my-drawer-2" class="drawer-overlay"></label> 
-      <ul class="menu p-4 w-80 bg-base-100 text-base-content"> -->
-        <!-- Sidebar content here -->
-        <!-- <li><a href="/tracker">Daily Log</a></li>
+      <ul class="menu p-4 w-80 bg-base-100 text-base-content"> 
+        Sidebar content here
+        <li><a href="/tracker">Daily Log</a></li>
         <li><a href="/analytics">Analytics</a></li>
         <li><a href="/videos">My Videos</a></li>
         <li><a href="/chat">Chat</a></li>
@@ -39,8 +39,8 @@
         <li><a href="/search">Search</a></li>
       </ul>
     </div>
-  </div> -->
-  <!-- <div class="stats shadow">
+  </div>
+  <!-- <div class="stats shadow"> -->
   
     <div class="stat">
       <div class="stat-figure text-primary">
@@ -81,17 +81,31 @@
   <%
   function getFormattedDay(date) {
     let options = { day: '2-digit', timeZone: 'America/New_York' };
-    return Number(date.toLocaleString('en-US', options).split(',')[0]);
+    //return Number(date.toLocaleString('en-US', options).split(',')[0]);
+    console.log(date, date.getDate())
+    return date.getDate() + 1
   }  
   let today = new Date()
   let currentMonth = today.getMonth()
   %>
 
-
+  
 <!-- the array being passed to the server must go where the conditional is -->
   <section class="dailySquares">
-    <%for(let i=1; i <= 31; i++){ %>
-      <section class="square <%if(trackerLogs.find(log => log.date.getMonth() === currentMonth && getFormattedDay(log.date) === i )){ %>squareComplete<% } %>"></section>
+    <%for(let i=1; i <= 31; i++){ 
+      const logsForThisDay = trackerLogs.filter(log => log.date.getMonth() === currentMonth && log.date.getDate() + 1 === i )
+      let logCount = logsForThisDay.length
+      let colorClass = ''
+      if(logCount > 5){
+        colorClass = 'squareComplete5'
+      } else if(logCount > 3){
+        colorClass = 'squareComplete3'
+      } else if(logCount > 0){
+        colorClass = 'squareComplete'
+      }
+      console.log(logCount, colorClass)
+      %>
+      <section class="square <%=colorClass%>"></section>
     <% } %>  
   </section>
 
