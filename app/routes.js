@@ -1,3 +1,4 @@
+const cloudinary = 
 module.exports = function(app, passport, db, mongodb) {
 //require gets replaced by this function ^^^^
 // normal routes ===============================================================
@@ -39,7 +40,7 @@ module.exports = function(app, passport, db, mongodb) {
         })
     });
 
-    // MEDIA just getting page ==============================
+    // MEDIA just rendering page ==============================
     app.get('/media', function(req, res) {
       res.render('media.ejs');
   });
