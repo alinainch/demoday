@@ -27,6 +27,7 @@ module.exports = function(app, passport, db, mongodb) {
         res.redirect('/');
     });
 
+    // TRACKER ==============================
     app.get('/tracker', isLoggedIn, function(req, res) {
         db.collection('tracker').find().toArray((err, result) => {
           if (err) return console.log(err)
@@ -37,6 +38,11 @@ module.exports = function(app, passport, db, mongodb) {
           })
         })
     });
+
+    // MEDIA just getting page ==============================
+    app.get('/media', function(req, res) {
+      res.render('media.ejs');
+  });
 
 // message board routes ===============================================================
     //matching route for the form action in profile.ejs
