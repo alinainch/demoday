@@ -3,6 +3,7 @@ var thumbDown = document.getElementsByClassName("fa-thumbs-down");
 var trash = document.getElementById("trackerBtn");
 
 
+
 Array.from(thumbUp).forEach(function (element) {
   element.addEventListener('click', function () {
     const book = this.parentNode.parentNode.childNodes[1].innerText
@@ -84,8 +85,19 @@ $('#evoCalendar').evoCalendar({
   calendarEvents: myEvents
 });
 
-// $('#evoCalendar').evoCalendar({
-//   format: 'mm/dd/yyyy',
-//   titleFormat: 'MM yyyy',
-//   eventHeaderFormat: 'MM d, yyyy'
-// });
+const addEventBtn = document.querySelector('#addEventBtn').addEventListener('click', () => addCalendarEvent(document.getElementById('addEventID').value,
+$("#evoCalendar").evoCalendar('getActiveDate') ))
+
+//first arg is the function we call, second is the arg for the function
+function addCalendarEvent(name, date){
+  $("#evoCalendar").evoCalendar('addCalendarEvent', [{
+    id: "required-id",
+    name: name,
+    date: date,
+    type: "event",
+    everyYear: false
+  }]);
+  console.log(document.getElementById('addEventID').value)
+}
+
+

@@ -51,12 +51,16 @@
   </div>
   <!-- <div class="stats shadow"> -->
   <div id="evoCalendar"></div>
+  
+  <input id="addEventID" type="text" placeholder="Event Name">
+  <button id="addEventBtn">Add Event</button>
+  
 
-  <div class="alert alert-info" role="alert">
+  <!-- <div class="alert alert-info" role="alert">
     Mindful Yogi is a comprehensive yoga and fitness app that allows you to log your daily exercises, save yoga practice videos, connect with friends, find local yoga studios, and track your daily exercise progress.
-  </div> 
+  </div>  -->
 
-  <%
+  <!-- <%
   function getFormattedDay(date) {
     let options = { day: '2-digit', timeZone: 'America/New_York' };
     //return Number(date.toLocaleString('en-US', options).split(',')[0]);
@@ -65,11 +69,11 @@
   }  
   let today = new Date()
   let currentMonth = today.getMonth()
-  %>
+  %> -->
 
   
 <!-- the array being passed to the server must go where the conditional is -->
-  <section class="dailySquares">
+  <!-- <section class="dailySquares">
     <%for(let i=1; i <= 31; i++){ 
       const logsForThisDay = trackerLogs.filter(log => log.date.getMonth() === currentMonth && log.date.getDate() + 1 === i )
       let logCount = logsForThisDay.length
@@ -85,7 +89,7 @@
       %>
       <section class="square <%=colorClass%>"></section>
     <% } %>  
-  </section>
+  </section> -->
 
   
  
