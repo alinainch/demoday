@@ -1,4 +1,4 @@
-const cloudinary = 
+const cloudinary = require('../middleware/cloudinary')
 module.exports = function(app, passport, db, mongodb) {
 //require gets replaced by this function ^^^^
 // normal routes ===============================================================

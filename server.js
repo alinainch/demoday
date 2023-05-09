@@ -17,6 +17,7 @@ var bodyParser   = require('body-parser');//get info from html forms
 var session      = require('express-session');//keeps logged in
 
 var configDB = require('./config/database.js'); //go to config folder and find db file. exports an obj. config db holds an obj that holds url dbname propery
+const dotenv = require('dotenv').config({path: './config/.env'})
 
 var db
 
