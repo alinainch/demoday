@@ -1,5 +1,5 @@
 const cloudinary = require('../middleware/cloudinary')
-module.exports = function(app, passport, db, mongodb) {
+module.exports = function(app, passport, db, mongodb, chatGPT) {
 //require gets replaced by this function ^^^^
 // normal routes ===============================================================
 
@@ -44,6 +44,20 @@ module.exports = function(app, passport, db, mongodb) {
     app.get('/media', function(req, res) {
       res.render('media.ejs');
   });
+
+  // Read chatGPT ==============================
+  app.get('/chatty', function(req, res) {
+    res.send(askGpt('give me the names of 3 yoga poses' + ' keep it brief'));
+});
+
+// Chatty ==============================
+  async function askGpt(prompt) {
+    const completion = await chatGPT.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: prompt }],
+    });
+    return completion.data.choices[0].message.content;
+  }
 
 // message board routes ===============================================================
     //matching route for the form action in profile.ejs

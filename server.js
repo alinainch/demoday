@@ -19,15 +19,20 @@ var session      = require('express-session');//keeps logged in
 var configDB = require('./config/database.js'); //go to config folder and find db file. exports an obj. config db holds an obj that holds url dbname propery
 const dotenv = require('dotenv').config({path: './config/.env'})
 
-var db
+const openai = require('openai')
 
+const chatGPT = new openai.OpenAIApi(
+  new openai.Configuration({ apiKey: process.env.CHATGPT_KEY })
+);
+
+var db
 // configuration ===============================================================
 //after mongoose connects the callback function runs either error or connects 
 //mongoose.connect takes a url(go to config file to see) then callback func 
 mongoose.connect(configDB.url, (err, database) => {
   if (err) return console.log(err)
   db = database
-  require('./app/routes.js')(app, passport, db, mongodb);
+  require('./app/routes.js')(app, passport, db, mongodb, chatGPT);
 }); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration. 2nd passport runs the func

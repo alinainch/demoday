@@ -85,8 +85,13 @@ $('#evoCalendar').evoCalendar({
   calendarEvents: myEvents
 });
 
-const addEventBtn = document.querySelector('#addEventBtn').addEventListener('click', () => addCalendarEvent(document.getElementById('addEventID').value,
-$("#evoCalendar").evoCalendar('getActiveDate') ))
+document.querySelector('#addEventBtn').addEventListener('click', () => addCalendarEvent(document.getElementById('addEventID').value,
+$("#evoCalendar").evoCalendar('getActiveDate')))
+
+// function anon(){
+//   addCalendarEvent(document.getElementById('addEventID').value
+//   $("#evoCalendar").evoCalendar('getActiveDate'))
+// }
 
 //first arg is the function we call, second is the arg for the function
 function addCalendarEvent(name, date){
