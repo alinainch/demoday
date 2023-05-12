@@ -71,20 +71,20 @@ module.exports = function(app, passport, db, mongodb, chatGPT) {
 
     //.put is sent by the fetch req in the main.js 
     //find one book from the database and update its reviews
-    app.put('/tracker', (req, res) => {
-      console.log(req.body)
-      db.collection('tracker')
-      .findOneAndUpdate({log: req.body.log}, {
-        $set: {
-          msg: req.body.msg
-        }
-      }, {
-        sort: {_id: -1},
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.redirect('/tracker')
-      })
-    })
+    // app.put('/tracker', (req, res) => {
+    //   console.log(req.body)
+    //   db.collection('tracker')
+    //   .findOneAndUpdate({log: req.body.log}, {
+    //     $set: {
+    //       msg: req.body.msg
+    //     }
+    //   }, {
+    //     sort: {_id: -1},
+    //   }, (err, result) => {
+    //     if (err) return res.send(err)
+    //     res.redirect('/tracker')
+    //   })
+    // })
     
     app.delete('/deleteTracker/:id', (req, res) => {
       console.log(req.params.id)

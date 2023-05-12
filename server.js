@@ -1,63 +1,71 @@
-// server.js
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const passport = require("passport");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const methodOverride = require("method-override");
+const flash = require("express-flash");
+const logger = require("morgan");
+const connectDB = require("./config/database");
+const mainRoutes = require("./routes/main");
+const postRoutes = require("./routes/posts");
 
-// set up ======================================================================
-// get all the tools we need
-var express  = require('express');
-var app      = express();
-var port     = process.env.PORT || 1111;
-const MongoClient = require('mongodb').MongoClient
-const mongodb = require('mongodb')
-var mongoose = require('mongoose'); //has schemas. layer on top of mongodb
-var passport = require('passport');
-var flash    = require('connect-flash');
-const methodOverride = require('method-override')
-var morgan       = require('morgan'); //packagae that logs all reqs
-var cookieParser = require('cookie-parser');//enables us to look at cookies (helps stay logged in)
-var bodyParser   = require('body-parser');//get info from html forms
-var session      = require('express-session');//keeps logged in
+//Use .env file in config folder
+require("dotenv").config({ path: "./config/.env" });
 
-var configDB = require('./config/database.js'); //go to config folder and find db file. exports an obj. config db holds an obj that holds url dbname propery
-const dotenv = require('dotenv').config({path: './config/.env'})
+// Passport config
+require("./config/passport")(passport);
 
+//Connect To Database
+connectDB();
+
+//Using EJS for views
+app.set("view engine", "ejs");
+
+//Static Folder
+app.use(express.static("public"));
+
+//Body Parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+//Logging
+app.use(logger("dev"));
+
+//Use forms for put / delete
+app.use(methodOverride("_method"));
+
+// Setup Sessions - stored in MongoDB
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Use flash messages for errors, info, ect...
+app.use(flash());
+
+//Setup Routes For Which The Server Is Listening
+//"post" needs to come before every route in post routes
+app.use("/", mainRoutes);
+app.use("/post", postRoutes);
+
+//Server Running
+app.listen(process.env.PORT, () => {
+  console.log("Server is running, you better catch it!");
+});
+
+//Use chatGPT
 const openai = require('openai')
-
 const chatGPT = new openai.OpenAIApi(
   new openai.Configuration({ apiKey: process.env.CHATGPT_KEY })
 );
 
-var db
-// configuration ===============================================================
-//after mongoose connects the callback function runs either error or connects 
-//mongoose.connect takes a url(go to config file to see) then callback func 
-mongoose.connect(configDB.url, (err, database) => {
-  if (err) return console.log(err)
-  db = database
-  require('./app/routes.js')(app, passport, db, mongodb, chatGPT);
-}); // connect to our database
-
-require('./config/passport')(passport); // pass passport for configuration. 2nd passport runs the func
-
-// set up our express application
-app.use(morgan('dev')); // log every request to the console
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser.json()); // get information from html forms
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'))
-
-
-app.set('view engine', 'ejs'); // set up ejs for templating
-app.use(methodOverride('_method'))
-// required for passport
-app.use(session({
-    secret: 'rcbootcamp2023a', // session secret
-    resave: true,
-    saveUninitialized: true
-}));
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
-
-
-// launch ======================================================================
-app.listen(port);
-console.log('The magic happens on port ' + port);

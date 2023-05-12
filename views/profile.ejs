@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="/evo-calendar.min.css" />
 <!-- Optional Themes -->
 <link rel="stylesheet" href="/evo-calendar.midnight-blue.min.css" />
+
 <!-- <link rel="stylesheet" href="evo-calendar.orange-coral.css" />
 <link rel="stylesheet" href="evo-calendar.royal-navy.css" /> -->
 <!-- JavaScript -->
-<script src="/jquery-3.6.4.slim.min.js"></script>
-<script src="/evo-calendar.min.js"></script>
+
 </head>
 <body>
   <header class="page-header">
@@ -40,9 +40,9 @@
       <label for="my-drawer-2" class="drawer-overlay"></label> 
       <ul class="menu p-4 w-80 bg-base-100 text-base-content"> 
         Sidebar content here
-        <li><a href="/tracker">Daily Log</a></li>
+        <li><a href="/post/getTracker">Daily Log</a></li>
         <li><a href="/analytics">Analytics</a></li>
-        <li><a href="/videos">My Videos</a></li>
+        <li><a href="/media">My Videos</a></li>
         <li><a href="/chat">Chat</a></li>
         <li><a href="/friends">Friends</a></li>
         <li><a href="/search">Search</a></li>
@@ -56,45 +56,13 @@
   <button id="addEventBtn">Add Event</button>
   
 
-  <!-- <div class="alert alert-info" role="alert">
-    Mindful Yogi is a comprehensive yoga and fitness app that allows you to log your daily exercises, save yoga practice videos, connect with friends, find local yoga studios, and track your daily exercise progress.
-  </div>  -->
-
-  <!-- <%
-  function getFormattedDay(date) {
-    let options = { day: '2-digit', timeZone: 'America/New_York' };
-    //return Number(date.toLocaleString('en-US', options).split(',')[0]);
-    console.log(date, date.getDate())
-    return date.getDate() + 1
-  }  
-  let today = new Date()
-  let currentMonth = today.getMonth()
-  %> -->
-
-  
-<!-- the array being passed to the server must go where the conditional is -->
-  <!-- <section class="dailySquares">
-    <%for(let i=1; i <= 31; i++){ 
-      const logsForThisDay = trackerLogs.filter(log => log.date.getMonth() === currentMonth && log.date.getDate() + 1 === i )
-      let logCount = logsForThisDay.length
-      let colorClass = ''
-      if(logCount > 5){
-        colorClass = 'squareComplete5'
-      } else if(logCount > 3){
-        colorClass = 'squareComplete3'
-      } else if(logCount > 0){
-        colorClass = 'squareComplete'
-      }
-      console.log(logCount, colorClass)
-      %>
-      <section class="square <%=colorClass%>"></section>
-    <% } %>  
-  </section> -->
+ 
 
   
  
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script type="text/javascript" src="/main.js"></script>
+  <script src="/jquery-3.6.4.slim.min.js"></script>
+  <script src="/evo-calendar.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="text/javascript" src="/cal.js"></script>
 </body> 
 </html>
