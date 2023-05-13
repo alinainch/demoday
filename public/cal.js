@@ -1,46 +1,35 @@
-myEvents = [
-  { 
-    id: "required-id-1",
-    name: "New Year", 
-    date: "Wed Jan 01 2020 00:00:00 GMT-0800 (Pacific Standard Time)", 
-    type: "holiday", 
-    everyYear: true 
+document.querySelector('#addEventBtn').addEventListener('click', () => { 
+  fetch('/cal', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
   },
-  { 
-    id: "required-id-2",
-    name: "Valentine's Day", 
-    date: "Fri Feb 14 2020 00:00:00 GMT-0800 (Pacific Standard Time)", 
-    type: "holiday", 
-    everyYear: true,
-    color: "#222"
-  },
-  { 
-    id: "required-id-3",
-    name: "Custom Date", 
-    badge: "08/03 - 08/05",
-    date: ["August/03/2020", "August/05/2020"],
-    description: "Description here",
-    type: "event"
-  }
-  // more events here
-]
+  body: JSON.stringify({ eventName: document.getElementById('addEventID').value, date: $("#evoCalendar").evoCalendar('getActiveDate') })
+})
+  .then(response => response.json())
+  .then(data => {
+    addCalendarEvent(document.getElementById('addEventID').value,
+    $("#evoCalendar").evoCalendar('getActiveDate'), data._id)
+    console.log('Response:', data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+  console.log('save', document.getElementById('addEventID').value, $("#evoCalendar").evoCalendar('getActiveDate') )
+})
 
-$('#evoCalendar').evoCalendar({
-  calendarEvents: myEvents
-});
-
-document.querySelector('#addEventBtn').addEventListener('click', () => addCalendarEvent(document.getElementById('addEventID').value,
-$("#evoCalendar").evoCalendar('getActiveDate')))
 
 
 //first arg is the function we call, second is the arg for the function
-function addCalendarEvent(name, date){
-  $("#evoCalendar").evoCalendar('addCalendarEvent', [{
-    id: "required-id",
+function addCalendarEvent(name, date, id) {
+  const newEvent = {
+    id: id,
     name: name,
     date: date,
     type: "event",
     everyYear: false
-  }]);
+  }
+  $("#evoCalendar").evoCalendar('addCalendarEvent', [newEvent]);
   console.log(document.getElementById('addEventID').value)
+  return newEvent
 }

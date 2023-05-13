@@ -12,28 +12,6 @@ module.exports = {
       console.log(err);
     }
   },
-  getTracker: async (req, res) => {
-    try {
-      const posts = await Tracker.find({ user: req.user.id });
-      console.log(posts)
-      res.render("tracker.ejs", { tracker: posts, user: req.user });
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  createTracker: async (req, res) => {
-    try {
-      await Tracker.create({
-        user: req.user.id,
-        log: req.body.log,
-        date: req.body.date
-      });
-      console.log("Log has been added!");
-      res.redirect("/getTracker");
-    } catch (err) {
-      console.log(err);
-    }
-  },
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
