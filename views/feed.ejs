@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>MINDFUL YOGI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="icon" href="images/yoga.jpg">
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="/feed">Mindful Yogi</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="/tracker">DAILY LOG</a></li>
+								<li><a href="/media">MY MEDIA</a></li>
+								<li><a href="/cal">CALENDAR</a></li>
+								<li><a href="/profile">PROFILE</a></li>
+								<li><a href="/seq">SEQUENCES</a></li>
+								<li><a href="/faq">FAQ</a></li>
+							</ul>
+						</nav>
+						<nav class="main">
+							<ul>
+								<li >
+									<a class="fa-search" >Search</a>
+									<form>
+										<input type="text" id="searchid" name="category" placeholder="Search" />
+									</form>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<% for(let i=0; i < posts.length; i++){ %>
+
+								<article class="post">
+									<header>
+										<div class="title">
+											<h2><a href="/post/<%= posts[i]._id%>"><%= posts[i].title %></a>
+												<!-- posts[i].user is the param id we need to pass in. this is the user id of the person who made the post. go into post model and grab the user (key) id (value) -->
+												<a href="/profile/<%= posts[i].user %>" class="author"><span class="name"><%= posts[i].userName %></span><img src="images/yoga.jpg" alt="" /></a>
+											</div>
+										</header>
+										<a href="/post/<%= posts[i]._id%>" class="image featured"><img src="<%= posts[i].image%>" alt="" /></a>
+										<p><%= posts[i].caption %></p>
+										<footer>
+											<ul class="actions">
+												<li><a href="/post/<%= posts[i]._id%>" class="button large">See Post</a></li>
+											</ul>
+											<ul class="stats"> 
+												<form
+												class="col-1"
+												action="/post/likePost/<%= posts[i]._id %>?_method=PUT"
+												method="POST"
+												>
+												<input class="hide" type="text" name="page" value="feed" hidden>
+												<button class="icon solid fa-heart" type="submit"><%= posts[i].likes %></button>
+											</form>
+											<%let commentCount = comments.filter(x => x.postID.equals(posts[i]._id)).length%>
+											<li><a href="/post/<%= posts[i]._id%>" class="icon solid fa-comment"></a><%=commentCount%></li>
+											<time class="author"><%= posts[i].createdAt.toISOString().split('T')[0] %></time>
+										</ul>
+									</footer>
+								</article>
+							<% } %>
+
+
+					</div>
+
+				<!-- Sidebar -->
+					<section id="sidebar">
+
+						<!-- Intro -->
+							<section id="intro">
+								<a href="#" class="logo"><img src="images/yoga.jpg" alt="" /></a>
+								<header>
+									<h2>Welcome Back</h2>
+									<p>A personal approach to documenting your yoga journey</p>
+								</header>
+							</section>
+
+						<!-- Mini Posts -->
+							<section>
+								<div class="mini-posts">
+									
+									<!-- Mini Post -->
+									
+								
+									
+
+								</div>
+							</section>
+
+						<!-- Posts List -->
+						<% for(let i=0; i<logs.length; i++) {%>
+							<section>
+								<ul class="posts">
+									<li>
+										<article>
+											<header>
+												<h3><a href="single.html"><%=logs[logs.length - i - 1].log%></a></h3>
+												<time class="published" datetime="2015-10-20"><%=logs[i].date.toISOString().split('T')[0]%></time>
+												<p><%=logs.userName%></p>
+											</header>
+											<a href="single.html" class="image"><img src="images/pic08.jpg" alt="" /></a>
+										</article>
+									</li>
+								</ul>
+							</section>
+						<% } %>
+
+						<!-- About -->
+							<section class="blurb">
+								<h2>About</h2>
+								<p>Discover the power of mindfulness and yoga with Mindful Yogi, the app that offers a calendar for scheduling your practice, daily logs for tracking progress, and a platform to effortlessly share your yoga journey with others, fostering a sense of community and inspiration.</p>
+								<ul class="actions">
+									<li><a href="/faq" class="button">Learn More</a></li>
+								</ul>
+							</section>
+
+						<!-- Footer -->
+							<section id="footer">
+								<ul class="icons">
+									<li><a href="https://twitter.com/alinainch" target="_blank" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="https://alinainch.netlify.app/" target="_blank" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
+									<li><a href="https://linkedin.com/in/alina-inchaustegui" target="_blank" class="fa-brands fa-linkedin-in">Linkedin</span></a></li>
+									<li><a href="mailto:alinainchaustegui@gmail.com" target="_blank" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+								</ul>
+								<p class="copyright">&copy; Mindful Yogi: <a href="http://html5up.net">Alina Inchaustegui</a>
+							</section>
+
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

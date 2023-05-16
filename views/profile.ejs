@@ -1,72 +1,75 @@
 <%- include('partials/header') -%>
-  <div class="drawer drawer-mobile">
-    <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-content flex flex-col items-center justify-center"> 
-      <!-- Page content here -->
-      <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Navigate</label>
-    </div> 
-    <div class="drawer-side">
-      <label for="my-drawer-2" class="drawer-overlay"></label> 
-      <ul class="menu p-4 w-80 bg-base-100 text-base-content"> 
-        Sidebar content here
-        <li><a href="/tracker">Daily Log</a></li>
-        <li><a href="/analytics">Analytics</a></li>
-        <li><a href="/media">My Videos</a></li>
-        <li><a href="/chat">Chat</a></li>
-        <li><a href="/friends">Friends</a></li>
-        <li><a href="/search">Search</a></li>
-      </ul>
-    </div>
+<header id="header">
+  <h1><a href="/feed">Mindful Yogi</a></h1>
+  <nav class="links">
+    <ul>
+      <li><a href="/tracker">DAILY LOG</a></li>
+      <li><a href="/media">MY MEDIA</a></li>
+      <li><a href="/cal">CALENDAR</a></li>
+      <li><a href="/profile">PROFILE</a></li>
+      <li><a href="/sequence">SEQUENCES</a></li>
+      <li><a href="/faq">FAQ</a></li>
+    </ul>
+  </nav>
+  <nav class="main">
+    <ul>
+      <li class="search">
+        <a class="fa-search" href="#search">Search</a>
+        <form id="search" method="get" action="#">
+          <input type="text" name="query" placeholder="Search" />
+        </form>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class="col-6">
+  <div>
+    <p><strong>User Name</strong>: <%= user.userName %></p>
+    <p><strong>Email</strong>: <%= user.email %></p>
+    <a href="/logout" class="col-3 btn btn-primary">Logout</a>
   </div>
-  <!-- <div class="stats shadow"> -->
-    <div id="evoCalendar"></div>
-  
-    <input id="addEventID" type="text" placeholder="Event Name">
-    <button id="addEventBtn">Add Event</button>
-    
-  <div class="container">
-    <div class="row mt-5">
-        <div class="col-6">
-            <div>
-                <p><strong>User Name</strong>: <%= user.userName %></p>
-                <p><strong>Email</strong>: <%= user.email %></p>
-                <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-            </div>
-            <div class="mt-5">
-              <h2>Add a post</h2>
-              <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title">
-                </div>
-                <div class="mb-3">
-                  <label for="caption" class="form-label">Caption</label>
-                  <textarea class="form-control" id="caption" name="caption"></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="imgUpload" class="form-label">Image</label>
-                  <input type="file" class="form-control" id="imageUpload" name="file">
-                </div>
-                <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-              </form>
-            </div>
-        </div>
-        <div class="col-6">
-          <ul class="row list-unstyled">
-          <% for(var i=0; i<posts.length; i++) {%>
-            <li class="col-6 justify-content-between mt-5">
-              <a href="/post/<%= posts[i]._id%>">
-                <img class="img-fluid" src="<%= posts[i].image%>">
-              </a>
-            </li>
-          <% } %>
-          </ul>
-          <div class="row justify-content-center mt-5">
-            <a class="btn btn-primary" href="/feed">Return to Feed</a>
-          </div>  
-        </div>  
+  <div class="mt-5">
+    <h2>Add a post</h2>
+    <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+      <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" name="title">
       </div>
-    </div>
+      <div class="mb-3">
+        <label for="caption" class="form-label">Caption</label>
+        <textarea class="form-control" id="caption" name="caption"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="imgUpload" class="form-label">Image</label>
+        <input type="file" class="form-control" id="imageUpload" name="file">
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select name="category" id="">
+          <option value="vinyasa">Vinyasa</option>
+          <option value="restorative">Restorative</option>
+          <option value="hatha">Hatha</option>
+        </select>
+        <textarea class="form-control" id="caption" name="caption"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+
+    </form>
+  </div>
+  <div class="col-6">
+    <ul class="row list-unstyled">
+    <% for(var i=0; i<posts.length; i++) {%>
+      <li class="col-6 justify-content-between mt-5">
+        <a href="/post/<%= posts[i]._id%>">
+          <img class="img-fluid" src="<%= posts[i].image%>">
+        </a>
+      </li>
+      <% } %>
+    </ul>
+    <div class="row justify-content-center mt-5">
+      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+    </div>  
+      
   </div>
 
 

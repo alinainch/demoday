@@ -2,12 +2,19 @@ const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment")
 const Tracker = require("../models/Tracker")
+const User = require("../models/User")
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
+
+      // if we have the id param (not logged in) find the user for that id. else, return the logged in user. userToRender is a User model object
+      const userToRender = req.params.id ? await User.findById(req.params.id) : req.user
+
+      //find all posts made by the specific user
+      const posts = await Post.find({ user: userToRender});
+
+      res.render("profile.ejs", { posts: posts, user: userToRender });
     } catch (err) {
       console.log(err);
     }
@@ -41,6 +48,8 @@ module.exports = {
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
+        userName: req.user.userName,
+        category: req.body.category
       });
       console.log("Post has been added!");
       res.redirect("/profile");
@@ -63,14 +72,16 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
+      
+      const thisPost = await Post.findById(req.params.id)
+      thisPost.likes += 1
+      thisPost.save()
       console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      if(req.body.page == 'feed'){
+        res.redirect('/feed')
+      } else {
+        res.redirect(`/post/${req.params.id}`);
+      }
     } catch (err) {
       console.log(err);
     }

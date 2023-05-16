@@ -12,6 +12,9 @@ const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 const trackerRoutes = require("./routes/tracker")
 const calRoutes = require("./routes/cal")
+const feedRoutes = require("./routes/feed")
+const seqRoutes = require("./routes/seq")
+
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -61,6 +64,9 @@ app.use('/', mainRoutes);
 app.use('/post', postRoutes);
 app.use('/tracker', trackerRoutes)
 app.use('/cal', calRoutes)
+app.use('/feed', feedRoutes)
+app.use('/category', feedRoutes)
+app.use('/seq', seqRoutes)
 
 //Server Running
 app.listen(process.env.PORT, () => {

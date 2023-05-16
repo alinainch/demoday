@@ -13,6 +13,10 @@ const TrackerSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  userName: {
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model("Tracker", TrackerSchema);

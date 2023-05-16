@@ -15,7 +15,8 @@ module.exports = {
       await Tracker.create({
         user: req.user.id,
         log: req.body.log,
-        date: req.body.date
+        date: req.body.date,
+        userName: req.user.userName
       });
       console.log("Log has been added!");
       res.redirect("/tracker");

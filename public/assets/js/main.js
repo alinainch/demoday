@@ -42,43 +42,50 @@
 				visibleClass: 'is-menu-visible'
 			});
 
-	// Search (header).
-		var $search = $('#search'),
-			$search_input = $search.find('input');
+			const searchBtn = document.querySelector('.fa-search')
+			searchBtn.addEventListener('click', search)
 
-		$body
-			.on('click', '[href="#search"]', function(event) {
+			function search(){
+				const searchInput = document.querySelector('#searchid').value
+				window.location.replace(`/category/${searchInput}`)
+			}
+	// // Search (header).
+	// 	var $search = $('#search'),
+	// 		$search_input = $search.find('input');
 
-				event.preventDefault();
+	// 	$body
+	// 		.on('click', '[href="#search"]', function(event) {
 
-				// Not visible?
-					if (!$search.hasClass('visible')) {
+	// 			event.preventDefault();
 
-						// Reset form.
-							$search[0].reset();
+	// 			// Not visible?
+	// 				if (!$search.hasClass('visible')) {
 
-						// Show.
-							$search.addClass('visible');
+	// 					// Reset form.
+	// 						$search[0].reset();
 
-						// Focus input.
-							$search_input.focus();
+	// 					// Show.
+	// 						$search.addClass('visible');
 
-					}
+	// 					// Focus input.
+	// 						$search_input.focus();
 
-			});
+	// 				}
 
-		$search_input
-			.on('keydown', function(event) {
+	// 		});
 
-				if (event.keyCode == 27)
-					$search_input.blur();
+	// 	$search_input
+	// 		.on('keydown', function(event) {
 
-			})
-			.on('blur', function() {
-				window.setTimeout(function() {
-					$search.removeClass('visible');
-				}, 100);
-			});
+	// 			if (event.keyCode == 27)
+	// 				$search_input.blur();
+
+	// 		})
+	// 		.on('blur', function() {
+	// 			window.setTimeout(function() {
+	// 				$search.removeClass('visible');
+	// 			}, 100);
+	// 		});
 
 	// Intro.
 		var $intro = $('#intro');

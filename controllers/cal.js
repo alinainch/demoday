@@ -13,6 +13,7 @@ module.exports = {
   },
   post: async (req, res) => {
     try {
+      //newEvent is data in fetch 
       const newEvent = await Cal.create({
         user: req.user.id,
         eventName: req.body.eventName,

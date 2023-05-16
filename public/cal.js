@@ -33,3 +33,5 @@ function addCalendarEvent(name, date, id) {
   console.log(document.getElementById('addEventID').value)
   return newEvent
 }
+
+// module.exports('')
