@@ -20,7 +20,7 @@ module.exports = {
       const logs = await Tracker.find({ user: req.user.id }).sort({ createdAt: "desc" }).lean();
       const comments = await Comment.find();
       console.log(posts)
-      res.render("feed.ejs", { posts: posts, user: req.user, logs: logs, comments: comments});
+      res.render("category.ejs", { posts: posts, user: req.user, logs: logs, comments: comments});
     } catch (err) {
       console.log(err);
     }

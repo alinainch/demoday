@@ -14,6 +14,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  profilePic: {
+    type: String,
+    default: ('add cloudinary pic')
+  },
   password: String,
   friends: [{
     type: mongoose.Schema.ObjectId,

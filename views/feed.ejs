@@ -1,9 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-	Future Imperfect by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <html>
 	<head>
 		<title>MINDFUL YOGI</title>
@@ -27,7 +23,7 @@
 								<li><a href="/cal">CALENDAR</a></li>
 								<li><a href="/profile">PROFILE</a></li>
 								<li><a href="/seq">SEQUENCES</a></li>
-								<li><a href="/faq">FAQ</a></li>
+								<li><a href="https://alinainch.netlify.app/" target="_blank">FAQ</a></li>
 							</ul>
 						</nav>
 						<nav class="main">
@@ -54,8 +50,11 @@
 										<div class="title">
 											<h2><a href="/post/<%= posts[i]._id%>"><%= posts[i].title %></a>
 												<!-- posts[i].user is the param id we need to pass in. this is the user id of the person who made the post. go into post model and grab the user (key) id (value) -->
+											</h2>
+										</div>
+										<div class="meta">
 												<a href="/profile/<%= posts[i].user %>" class="author"><span class="name"><%= posts[i].userName %></span><img src="images/yoga.jpg" alt="" /></a>
-											</div>
+										</div>
 										</header>
 										<a href="/post/<%= posts[i]._id%>" class="image featured"><img src="<%= posts[i].image%>" alt="" /></a>
 										<p><%= posts[i].caption %></p>
@@ -95,17 +94,7 @@
 								</header>
 							</section>
 
-						<!-- Mini Posts -->
-							<section>
-								<div class="mini-posts">
-									
-									<!-- Mini Post -->
-									
-								
-									
-
-								</div>
-							</section>
+						
 
 						<!-- Posts List -->
 						<% for(let i=0; i<logs.length; i++) {%>
@@ -114,9 +103,9 @@
 									<li>
 										<article>
 											<header>
-												<h3><a href="single.html"><%=logs[logs.length - i - 1].log%></a></h3>
+												<h3><a href="single.html"><%=logs[i].log%></a></h3>
 												<time class="published" datetime="2015-10-20"><%=logs[i].date.toISOString().split('T')[0]%></time>
-												<p><%=logs.userName%></p>
+												<p><%=user.userName%></p>
 											</header>
 											<a href="single.html" class="image"><img src="images/pic08.jpg" alt="" /></a>
 										</article>

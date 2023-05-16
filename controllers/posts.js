@@ -86,6 +86,20 @@ module.exports = {
       console.log(err);
     }
   },
+  profilePic: async (req, res) => {
+    try {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      await User.findOneAndUpdate({ _id :req.user.id },
+      {
+        $set: {
+          profilePic: result.secure_url,
+        }
+      });
+      res.redirect('/feed')
+    } catch (err) {
+      console.log(err);
+    }
+  },
   deletePost: async (req, res) => {
     try {
       // Find post by id
