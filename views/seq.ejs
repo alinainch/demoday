@@ -4,27 +4,42 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../style.css">
   <title>Document</title>
 </head>
 <body>
 
+<!--  -->
   <form action="/seq/pose?_method=GET" method="POST">
     <input name="pose" type="text">
     <button type="submit">Check</button>
   </form>
 
+  <!-- Just for searching the API -->
   <p><%=yogaObj.english_name%></p>
   <img src="<%=yogaObj.url_svg%>">
   <p>Description: <%=yogaObj.pose_description%></p>
   <p>Benefits: <%=yogaObj.pose_benefits%></p>
+  <button id="addSeq">+</button>
+  
+<!-- Create new Sequence -->
+<form action="/seq" method="POST">
+  <input type="text" name="seqTitle" placeholder="Title">
+  <button type="submit"></button>
+</form>
 
-  <!-- Create a seq model that is just a bunch of objects for sequences and 
-    each obj is a seq. 
-Name
-Pic
+ <!-- Building a sequence -->
+<% for(let i=0; i < allPoses.length; i++){ %>
+  <section class="posesCard">
+    <p><%=allPoses[i].english_name%></p>
+    <img src="<%=allPoses[i].url_svg%>">
+    <button class="add">+</button>
+  </section>
+<% } %>
 
-Have it populate in seq ejs 
-Look at materialize css or cards component
- -->
+
+
+
+
 </body>
 </html>

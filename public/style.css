@@ -9,6 +9,16 @@ body{
   background-color: lavender;
 }
 
+.posesCard{
+  width: 25%;
+  float: left;
+  border: red;
+}
+
+.posesCard img{
+  width: 100%;
+}
+
 .main{
   height:70vh;
   width:100%;  

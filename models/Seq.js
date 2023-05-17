@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const SeqSchema = new mongoose.Schema({
   //name of each sequence 
-  name: {
+  title: {
     type: String,
     required: true,
   },
