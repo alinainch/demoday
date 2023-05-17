@@ -75,7 +75,11 @@
 												<time class="published" datetime="2015-10-20"><%=logs[i].date.toISOString().split('T')[0]%></time>
 												<p><%=user.userName%></p>
 											</header>
-											<a href="single.html" class="image"><img src="images/pic08.jpg" alt="" /></a>
+											<a href="single.html" class="image">
+												<% for(let j=0; j < allUsers.length; j++){ %>
+													<img src="<%=allUsers[j].userName === logs[i].userName ? allUsers[j].profilePic : null%>" alt="" />
+												<% } %>
+											</a>
 										</article>
 									</li>
 								</ul>
