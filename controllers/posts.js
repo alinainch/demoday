@@ -14,7 +14,7 @@ module.exports = {
       //find all posts made by the specific user
       const posts = await Post.find({ user: userToRender});
 
-      res.render("profile.ejs", { posts: posts, user: userToRender });
+      res.render("profile.ejs", { posts: posts, user: userToRender});
     } catch (err) {
       console.log(err);
     }
@@ -22,7 +22,9 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts});
+      const allUsers = await User.find();
+      console.log(allUsers)
+      res.render("feed.ejs", { posts: posts, allUsers: allUsers});
     } catch (err) {
       console.log(err);
     }
