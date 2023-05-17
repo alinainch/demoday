@@ -53,9 +53,10 @@
 											</h2>
 										</div>
 										<div class="meta">
-												<a href="/profile/<%= posts[i].user %>" class="author"><span class="name"><%= posts[i].userName %></span><img src="images/yoga.jpg" alt="" /></a>
+												<a href="/profile/<%= posts[i].user %>" class="author"><span class="name"><%= posts[i].userName %>
+												</span><img src="<%=user.profilePic%>" alt="" /></a>
 										</div>
-										</header>
+									</header>
 										<a href="/post/<%= posts[i]._id%>" class="image featured"><img src="<%= posts[i].image%>" alt="" /></a>
 										<p><%= posts[i].caption %></p>
 										<footer>

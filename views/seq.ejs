@@ -7,13 +7,24 @@
   <title>Document</title>
 </head>
 <body>
+
   <form action="/seq/pose?_method=GET" method="POST">
     <input name="pose" type="text">
     <button type="submit">Check</button>
   </form>
+
   <p><%=yogaObj.english_name%></p>
   <img src="<%=yogaObj.url_svg%>">
   <p>Description: <%=yogaObj.pose_description%></p>
   <p>Benefits: <%=yogaObj.pose_benefits%></p>
+
+  <!-- Create a seq model that is just a bunch of objects for sequences and 
+    each obj is a seq. 
+Name
+Pic
+
+Have it populate in seq ejs 
+Look at materialize css or cards component
+ -->
 </body>
 </html>

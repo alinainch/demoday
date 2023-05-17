@@ -8,4 +8,6 @@ router.get("/", ensureAuth, seqController.get);
 
 router.get("/pose", ensureAuth, seqController.getPose);
 
+router.post("/newSeq", ensureAuth, seqController.newSeq);
+
 module.exports = router;

@@ -11,7 +11,7 @@ router.get("/", homeController.getIndex);
 router.get("/single", homeController.getSingle);
 router.get("/profile", ensureAuth, postsController.getProfile); //logged in user profile
 router.get("/profile/:id", postsController.getProfile); 
-router.put("/profilePic/:id", upload.single("file"), postsController.profilePic);
+router.put("/profilePic", upload.single("file"), postsController.profilePic);
 router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);
 router.get("/logout", authController.logout);

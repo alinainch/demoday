@@ -1,3 +1,4 @@
+const Seq = require("../models/Seq")
 module.exports = {
   get: async (req, res) => {
     try {
@@ -18,6 +19,22 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
+  },
+  newSeq: async (req, res) => {
+    try {
+      const sequence = await Seq.create({
+        name: req.body.name,
+        madeBy: req.user.id,
+        poses: []
+    }); 
+    req.session.sequence = sequence._id
+     } catch (err) {
+      console.log(err);
+    }
   }
 }
 
+//store information in the session. add new sequence id into the session 
+//create a sequence
+//sequence has an id  - sequence._id
+//store sequence id to session

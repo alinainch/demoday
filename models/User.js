@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
   },
   profilePic: {
     type: String,
-    default: ('add cloudinary pic')
+    default: ('/images/yoga.jpg')
   },
   password: String,
   friends: [{
