@@ -10,4 +10,6 @@ router.get("/pose", ensureAuth, seqController.getPose);
 
 router.post("/newSeq", ensureAuth, seqController.newSeq);
 
+router.put("/addPose", ensureAuth, seqController.addPose);
+
 module.exports = router;

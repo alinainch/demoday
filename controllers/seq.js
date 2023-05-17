@@ -70,11 +70,20 @@ module.exports = {
     }
   },
 
-  postSeq: async (req, res) => {
+  addPose: async (req, res) => {
     //users can see all existing sequences 
     //create a new sequence or update a previous one 
     try {
-      
+      let poseName = req.body.poseName
+      let poseImg = req.body.poseImg
+      let sequenceId = req.body.sequences
+      await Seq.findOneAndUpdate({ _id : sequenceId },
+      {
+        $push: {
+         poses: {poseName: poseName, poseImg: poseImg}
+        }
+      });
+      res.redirect('/profile')
     } catch (err) {
       console.log(err);
     }
