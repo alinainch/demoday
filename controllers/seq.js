@@ -2,9 +2,32 @@ const Seq = require("../models/Seq")
 module.exports = {
   get: async (req, res) => {
     try {
-      const yoga = await fetch('https://yoga-api-nzy4.onrender.com/v1/categories');
-      const yogaObj = await yoga.json();
-      res.render("seq.ejs", { yogaObj: yogaObj });
+      const sequences = await Seq.find({madeBy: req.user.id})
+      let allPoses = await fetch('https://yoga-api-nzy4.onrender.com/v1/poses');
+      const posesObj = await allPoses.json();
+      function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+      
+        // While there remain elements to shuffle.
+        while (currentIndex != 0) {
+      
+          // Pick a remaining element.
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+      
+          // And swap it with the current element.
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+      
+        return array;
+      }
+      
+      let random = shuffle(posesObj).slice(0, 20);
+
+      console.log(random, 'this is random')
+      
+      res.render("seq.ejs", { allPoses: random, sequences: sequences});
     } catch (err) {
       console.log(err);
     }
@@ -41,7 +64,7 @@ module.exports = {
       console.log(random, 'this is random')
       const yoga = await fetch(`https://yoga-api-nzy4.onrender.com/v1/poses?name=${userInput}`);
       const yogaObj = await yoga.json()
-      res.render("seq.ejs", { yogaObj: yogaObj, allPoses: random });
+      res.render("seq.ejs", { yogaObj: yogaObj });
     } catch (err) {
       console.log(err);
     }
@@ -59,13 +82,14 @@ module.exports = {
 
   newSeq: async (req, res) => {
     try {
-      const sequence = await Seq.create({
-        name: req.body.name,
+      await Seq.create({
+        title: req.body.title,
         madeBy: req.user.id,
         poses: []
-    }); 
-    req.session.sequence = sequence._id
-     } catch (err) {
+      });
+      console.log("Sequence has been added!");
+      res.redirect('/seq'); 
+    } catch (err) {
       console.log(err);
     }
   },
