@@ -10,15 +10,21 @@ body{
 }
 
 .posesCard{
-  width: 25%;
+  width: 20%;
   float: left;
   border: red;
+  margin: 10px;
 }
 
 .posesCard img{
   width: 100%;
 }
-
+.hide{
+  display: none !important;
+}
+.btn{
+  width: 20%;
+}
 .main{
   height:70vh;
   width:100%;  
