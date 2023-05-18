@@ -657,7 +657,7 @@
         if (event_data.color) {
             markup += 'style="background-color:'+event_data.color+'"'
         }
-        markup += '></div></div><div class="event-info"><p class="event-title">'+_.limitTitle(event_data.name) + '<button class="deleteBtn" id="'+event_data.id+'">Delete</button>';
+        markup += '></div></div><div class="event-info"><p class="event-title">'+_.limitTitle(event_data.name) + '<form action="/cal/'+event_data.id+'?_method=DELETE" method="POST"><button class="deleteBtn" id="'+event_data.id+'">Delete</button></form>';
         if (event_data.badge) markup += '<span>'+event_data.badge+'</span>';
         markup += '</p>'
         if (event_data.description) markup += '<p class="event-desc">'+event_data.description+'</p>';
