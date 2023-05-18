@@ -6,7 +6,9 @@ module.exports = {
     try {
       const sequences = await Seq.find({madeBy: req.user.id})
       if(!posesObj){
+        console.log(new Date())
         let allPoses = await fetch('https://yoga-api-nzy4.onrender.com/v1/poses');
+        console.log(new Date())
         posesObj = await allPoses.json();
       }
       function shuffle(array) {

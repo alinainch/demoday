@@ -44,20 +44,22 @@
           </p>
           <img src="<%=allPoses[i].url_svg%>">
 
-          <form action="/seq/addPose?_method=PUT" method="POST">
+          <!-- <form action="/seq/addPose?_method=PUT" method="POST"> -->
+          <form id="seq">
             <div class="mb-3">
               <!-- putting it inside the form so we can send it to the DB -->
               <!-- hide 2 inputs so we can send to backend but user won't see it -->
-              <input class="hide" type="text" name="poseName" value="<%=allPoses[i].english_name%>">
-              <input class="hide" type="text" name="poseImg" value="<%=allPoses[i].url_svg%>">
-              <select name="sequences" id="">
+              <input id="poseName" class="hide" type="text" name="poseName" value="<%=allPoses[i].english_name%>">
+              <input id="poseImg" class="hide" type="text" name="poseImg" value="<%=allPoses[i].url_svg%>">
+              <select name="sequences" id="seqID">
+                <option value=""></option>
                 <% for(let j=0; j < sequences.length; j++){ %>
                   <option value="<%=sequences[j]._id%>">
                     <%=sequences[j].title%>
                   </option>
                   <% } %>
               </select>
-              <button class="btn" type="submit" class="btn btn-primary" value="Upload">+</button>
+              <button id="seqBtn"class="btn" type="submit" class="btn btn-primary" value="Upload">+</button>
             </div>
           </form>
         </section>
