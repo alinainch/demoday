@@ -11,25 +11,7 @@ module.exports = {
         console.log(new Date())
         posesObj = await allPoses.json();
       }
-      function shuffle(array) {
-        let currentIndex = array.length,  randomIndex;
       
-        // While there remain elements to shuffle.
-        while (currentIndex != 0) {
-      
-          // Pick a remaining element.
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex--;
-      
-          // And swap it with the current element.
-          [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-        } 
-        return array;
-      }
-
-      let random = shuffle(posesObj).slice(0, 20);
-      console.log(random, 'this is random')
       res.render("seq.ejs", { allPoses: posesObj.slice(0, 20), sequences: sequences});
     } catch (err) {
       console.log(err);
@@ -40,31 +22,7 @@ module.exports = {
     //assign a variable that will contain an array of 20 random poses
     //users can build their sequence
     try {
-      console.log('checking pose')
       const userInput = req.body.pose
-      let allPoses = await fetch('https://yoga-api-nzy4.onrender.com/v1/poses');
-      const posesObj = await allPoses.json();
-      function shuffle(array) {
-        let currentIndex = array.length,  randomIndex;
-      
-        // While there remain elements to shuffle.
-        while (currentIndex != 0) {
-      
-          // Pick a remaining element.
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex--;
-      
-          // And swap it with the current element.
-          [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-        }
-      
-        return array;
-      }
-      
-      let random = shuffle(posesObj).slice(0, 20);
-
-      console.log(random, 'this is random')
       const yoga = await fetch(`https://yoga-api-nzy4.onrender.com/v1/poses?name=${userInput}`);
       const yogaObj = await yoga.json()
       res.render("seq.ejs", { yogaObj: yogaObj });
@@ -80,7 +38,6 @@ module.exports = {
       let poseName = req.body.poseName
       let poseImg = req.body.poseImg
       let sequenceId = req.body.sequences
-      console.log('hi i am', sequenceId)
       await Seq.findOneAndUpdate({ _id : sequenceId },
       {
         $push: {
@@ -115,8 +72,22 @@ module.exports = {
     }
   }
 }
+// function shuffle(array) {
+      //   let currentIndex = array.length,  randomIndex;
+      
+      //   // While there remain elements to shuffle.
+      //   while (currentIndex != 0) {
+      
+      //     // Pick a remaining element.
+      //     randomIndex = Math.floor(Math.random() * currentIndex);
+      //     currentIndex--;
+      
+      //     // And swap it with the current element.
+      //     [array[currentIndex], array[randomIndex]] = [
+      //       array[randomIndex], array[currentIndex]];
+      //   } 
+      //   return array;
+      // }
 
-//store information in the session. add new sequence id into the session 
-//create a sequence
-//sequence has an id  - sequence._id
-//store sequence id to session
+      // let random = shuffle(posesObj).slice(0, 20);
+
