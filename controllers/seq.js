@@ -1,10 +1,14 @@
 const Seq = require("../models/Seq")
+let posesObj = null
+
 module.exports = {
   get: async (req, res) => {
     try {
       const sequences = await Seq.find({madeBy: req.user.id})
-      let allPoses = await fetch('https://yoga-api-nzy4.onrender.com/v1/poses');
-      const posesObj = await allPoses.json();
+      if(!posesObj){
+        let allPoses = await fetch('https://yoga-api-nzy4.onrender.com/v1/poses');
+        posesObj = await allPoses.json();
+      }
       function shuffle(array) {
         let currentIndex = array.length,  randomIndex;
       
@@ -18,16 +22,13 @@ module.exports = {
           // And swap it with the current element.
           [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
-        }
-      
+        } 
         return array;
       }
-      
-      let random = shuffle(posesObj).slice(0, 20);
 
+      let random = shuffle(posesObj).slice(0, 20);
       console.log(random, 'this is random')
-      
-      res.render("seq.ejs", { allPoses: random, sequences: sequences});
+      res.render("seq.ejs", { allPoses: posesObj.slice(0, 20), sequences: sequences});
     } catch (err) {
       console.log(err);
     }
@@ -83,7 +84,7 @@ module.exports = {
          poses: {poseName: poseName, poseImg: poseImg}
         }
       });
-      res.redirect('/profile')
+      res.send('ok')
     } catch (err) {
       console.log(err);
     }
@@ -102,4 +103,17 @@ module.exports = {
       console.log(err);
     }
   },
+  getSeq: async (req, res) => {
+    try {
+      const sequence = await Seq.findById(req.params.id);
+      res.render('single.ejs', { sequence: sequence});
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
+
+//store information in the session. add new sequence id into the session 
+//create a sequence
+//sequence has an id  - sequence._id
+//store sequence id to session
