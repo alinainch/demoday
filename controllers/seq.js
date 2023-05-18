@@ -80,13 +80,14 @@ module.exports = {
       let poseName = req.body.poseName
       let poseImg = req.body.poseImg
       let sequenceId = req.body.sequences
+      console.log('hi i am', sequenceId)
       await Seq.findOneAndUpdate({ _id : sequenceId },
       {
         $push: {
          poses: {poseName: poseName, poseImg: poseImg}
         }
       });
-      res.send('ok')
+      res.redirect('/seq')
     } catch (err) {
       console.log(err);
     }
