@@ -115,8 +115,3 @@ module.exports = {
     }
   },
 }
-
-//store information in the session. add new sequence id into the session 
-//create a sequence
-//sequence has an id  - sequence._id
-//store sequence id to session
