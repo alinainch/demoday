@@ -46,6 +46,7 @@
 
           <form action="/seq/addPose?_method=PUT" method="POST">
             <div class="mb-3">
+              <label for="imgUpload" class="form-label">Add Pose</label>
               <!-- putting it inside the form so we can send it to the DB -->
               <!-- hide 2 inputs so we can send to backend but user won't see it -->
               <input class="hide" type="text" name="poseName" value="<%=allPoses[i].english_name%>">
@@ -57,7 +58,7 @@
                   </option>
                   <% } %>
               </select>
-              <button class="btn" type="submit" class="btn btn-primary" value="Upload">+</button>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </div>
           </form>
         </section>

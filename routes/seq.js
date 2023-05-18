@@ -12,6 +12,4 @@ router.post("/newSeq", ensureAuth, seqController.newSeq);
 
 router.put("/addPose", ensureAuth, seqController.addPose);
 
-router.get("/:id", ensureAuth, seqController.getSeq);
-
 module.exports = router;
