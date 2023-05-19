@@ -30,6 +30,20 @@ module.exports = {
       console.log(err);
     }
   },
+  posesArray: async (req, res) => {
+    //get all the poses
+    //assign a variable that will contain an array of 20 random poses
+    //users can build their sequence
+    const sequences = await Seq.find({madeBy: req.user.id})
+    const userInput = req.body.getNum
+    try {
+      let allPoses = await fetch('https://yoga-api-nzy4.onrender.com/v1/poses');
+      posesObj = await allPoses.json();
+      res.render("seq.ejs", { allPoses: posesObj.slice(0, userInput), sequences: sequences});
+    } catch (err) {
+      console.log(err);
+    }
+  },
 
   addPose: async (req, res) => {
     //users can see all existing sequences 

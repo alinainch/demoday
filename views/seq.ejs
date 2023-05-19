@@ -18,9 +18,9 @@
   </form>
 
   <!-- Just for searching the API -->
+  <p>Description: </p>
   <p></p>
-  <img src="">
-  <p>Description:</p>
+  <img src=>
   <p>Benefits:</p>
   <button id="addSeq">+</button>
 
@@ -33,6 +33,10 @@
       <form action="/seq/newSeq" method="POST">
         <input type="text" name="title" placeholder="Title">
         <button type="submit">add seq</button>
+      </form>
+      <form action="/seq/input" method="POST">
+        <input type="number" name="getNum">
+        <button type="submit">Submit num</button>
       </form>
 
       <!-- Building a sequence -->
