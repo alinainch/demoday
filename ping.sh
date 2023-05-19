@@ -1,6 +1,6 @@
 while true; do
   curl 'https://yoga-api-nzy4.onrender.com/v1/poses'
-  sleep 200
+  sleep 30
 done
 
 

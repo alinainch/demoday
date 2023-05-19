@@ -1,34 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../style.css">
-  <title>Document</title>
-</head>
-
-<body>
+<%- include('partials/header') -%>
 
   <!--  -->
-  <form action="/seq/pose?_method=GET" method="POST">
+  <!-- <form action="/seq/pose?_method=GET" method="POST">
     <input name="pose" type="text">
     <button type="submit">Check</button>
-  </form>
+  </form> -->
 
   <!-- Just for searching the API -->
-  <p>Description: </p>
+  <!-- <p>Description: </p>
   <p></p>
   <img src=>
   <p>Benefits:</p>
-  <button id="addSeq">+</button>
+  <button id="addSeq">+</button> -->
 
   <!-- Create new Sequence -->
   <% for(let j=0; j < sequences.length; j++){ %>
-    <a href="/seq/<%=sequences[j]._id%>">
+    <span><a href="/seq/<%=sequences[j]._id%>">
       <%=sequences[j].title%>
-    </a>
+    </a></span>
     <% } %>
       <form action="/seq/newSeq" method="POST">
         <input type="text" name="title" placeholder="Title">

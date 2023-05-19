@@ -1,17 +1,20 @@
 const Seq = require("../models/Seq")
 let posesObj = null
+const fs = require('fs');
+
+//cached on my disk. No need to fetch
+function getPoses(){
+  if(!posesObj){
+    const data = fs.readFileSync('poses.json', 'utf8');
+    posesObj = JSON.parse(data);
+  }
+}
+getPoses()
 
 module.exports = {
   get: async (req, res) => {
     try {
       const sequences = await Seq.find({madeBy: req.user.id})
-      if(!posesObj){
-        console.log(new Date())
-        let allPoses = await fetch('https://yoga-api-nzy4.onrender.com/v1/poses');
-        console.log(new Date())
-        posesObj = await allPoses.json();
-      }
-      
       res.render("seq.ejs", { allPoses: posesObj.slice(0, 20), sequences: sequences});
     } catch (err) {
       console.log(err);
@@ -37,8 +40,6 @@ module.exports = {
     const sequences = await Seq.find({madeBy: req.user.id})
     const userInput = req.body.getNum
     try {
-      let allPoses = await fetch('https://yoga-api-nzy4.onrender.com/v1/poses');
-      posesObj = await allPoses.json();
       res.render("seq.ejs", { allPoses: posesObj.slice(0, userInput), sequences: sequences});
     } catch (err) {
       console.log(err);
@@ -86,22 +87,4 @@ module.exports = {
     }
   }
 }
-// function shuffle(array) {
-      //   let currentIndex = array.length,  randomIndex;
-      
-      //   // While there remain elements to shuffle.
-      //   while (currentIndex != 0) {
-      
-      //     // Pick a remaining element.
-      //     randomIndex = Math.floor(Math.random() * currentIndex);
-      //     currentIndex--;
-      
-      //     // And swap it with the current element.
-      //     [array[currentIndex], array[randomIndex]] = [
-      //       array[randomIndex], array[currentIndex]];
-      //   } 
-      //   return array;
-      // }
-
-      // let random = shuffle(posesObj).slice(0, 20);
 
