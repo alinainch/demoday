@@ -4,8 +4,6 @@ const fs = require('fs');
 const { ObjectID } = require("mongodb");
 
 
-
-
 //cached on my disk. No need to fetch
 function getPoses() {
   if (!posesObj) {
@@ -18,9 +16,12 @@ getPoses()
 module.exports = {
   get: async (req, res) => {
     try {
+      const posesPerPage = req.body.getNum || 5
       const sequences = await Seq.find({ madeBy: req.user.id })
-      const userInput = req.body.getNum
-      res.render("seq.ejs", { allPoses: posesObj.slice(0, userInput), sequences: sequences });
+      let page = +req.query.page || 1 
+      console.log(page)
+      res.render("seq.ejs", { allPoses: posesObj.slice((page - 1)* posesPerPage, page * posesPerPage ), sequences: sequences, pages: Math.ceil(posesObj.length / posesPerPage), posesPerPage: posesPerPage});
+    
     } catch (err) {
       console.log(err);
     }

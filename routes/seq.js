@@ -6,6 +6,8 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 //Tracker
 router.get("/", ensureAuth, seqController.get);
 
+router.post("/", ensureAuth, seqController.get);
+
 router.get("/pose", ensureAuth, seqController.getPose);
 
 router.post("/newSeq", ensureAuth, seqController.newSeq);

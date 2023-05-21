@@ -3612,3 +3612,10 @@ input, select, textarea {
 			}
 
 		}
+
+		.seqLinks{
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+			border: 1px solid red;
+		}

@@ -12,59 +12,72 @@
   <img src=>
   <p>Benefits:</p>
   <button id="addSeq">+</button> -->
+ 
 
-  <!-- Create new Sequence -->
-  <% for(let j=0; j < sequences.length; j++){ %>
-    <span><a href="/seq/<%=sequences[j]._id%>">
-      <%=sequences[j].title%>
-    </a></span>
-    <form action="/seq/deleteSeq/<%=sequences[j]._id%>?_method=DELETE" method="POST"
-      class="col-3">
-      <button class="button large">Trash</button>
-    </form>
-    <% } %>
-      <form action="/seq/newSeq" method="POST">
-        <input type="text" name="title" placeholder="Title">
-        <button type="submit">add seq</button>
+
+    <!-- Create new Sequence -->
+    <% for(let j=0; j < sequences.length; j++){ %>
+      <span><a href="/seq/<%=sequences[j]._id%>">
+          <%=sequences[j].title%>
+        </a></span>
+      <form action="/seq/deleteSeq/<%=sequences[j]._id%>?_method=DELETE" method="POST" class="col-3">
+        <button class="button large">Trash</button>
       </form>
-      <form action="/seq/input" method="POST">
-        <input type="number" name="getNum">
-        <button type="submit">Submit num</button>
-      </form>
+      <% } %>
+        <form action="/seq/newSeq" method="POST">
+          <input type="text" name="title" placeholder="Title">
+          <button type="submit">add seq</button>
+        </form>
+        <form action="/seq" method="POST">
+          <input type="number" name="getNum" value="<%=posesPerPage%>">
+          <button type="submit">Submit num</button>
+        </form>
 
-      <!-- Building a sequence -->
-      <% for(let i=0; i < allPoses.length; i++){ %>
-        <section class="posesCard">
-          <!-- this is to display to user but not availabile in DB -->
-          <p>
-            <%=allPoses[i].english_name%>
-          </p>
-          <img src="<%=allPoses[i].url_svg%>">
+        <!-- Building a sequence -->
+        <% for(let i=0; i < allPoses.length; i++){ %>
+          <section class="posesCard">
+            <!-- this is to display to user but not availabile in DB -->
+            <p>
+              <%=allPoses[i].english_name%>
+            </p>
+            <img src="<%=allPoses[i].url_svg%>">
 
-          <form action="/seq/addPose?_method=PUT" method="POST">
-            <div class="mb-3">
-              <!-- putting it inside the form so we can send it to the DB -->
-              <!-- hide 2 inputs so we can send to backend but user won't see it -->
-              <input id="poseName" class="hide" type="text" name="poseName" value="<%=allPoses[i].english_name%>">
-              <input id="poseImg" class="hide" type="text" name="poseImg" value="<%=allPoses[i].url_svg%>">
-            
-              <select name="sequences" id="seqID">
-                <option value=""></option>
-                <% for(let j=0; j < sequences.length; j++){ %>
-                  <option value="<%=sequences[j]._id%>">
-                    <%=sequences[j].title%>
-                  </option>
-                  <% } %>
-              </select>
-              <button id="seqBtn"class="btn" type="submit" class="btn btn-primary" value="Upload">+</button>
-            </div>
-          </form>
-        </section>
-        <% } %>
+            <form action="/seq/addPose?_method=PUT" method="POST">
+              <div class="mb-3">
+                <!-- putting it inside the form so we can send it to the DB -->
+                <!-- hide 2 inputs so we can send to backend but user won't see it -->
+                <input id="poseName" class="hide" type="text" name="poseName" value="<%=allPoses[i].english_name%>">
+                <input id="poseImg" class="hide" type="text" name="poseImg" value="<%=allPoses[i].url_svg%>">
+
+                <select name="sequences" id="seqID">
+                  <option value=""></option>
+                  <% for(let j=0; j < sequences.length; j++){ %>
+                    <option value="<%=sequences[j]._id%>">
+                      <%=sequences[j].title%>
+                    </option>
+                    <% } %>
+                </select>
+                <button id="seqBtn" class="btn" type="submit" class="btn btn-primary" value="Upload">+</button>
+              </div>
+            </form>
+          </section>
+          <% } %>
+  
+          <% for(let p=1; p <= pages; p++){ %>
+            <a href="http://localhost:1111/seq?page=<%= p %>"><%= p %></a>
+          <% } %>
+  <!-- <div class="seqLinks">
+    <a href="http://localhost:1111/seq?page=1">1</a>
+    <a href="http://localhost:1111/seq?page=2">2</a>
+    <a href="http://localhost:1111/seq?page=3">3</a>
+    <a href="http://localhost:1111/seq?page=4">4</a>
+    <a href="http://localhost:1111/seq?page=5">5</a>
+    <a href="http://localhost:1111/seq?page=5">6</a>
+    <a href="http://localhost:1111/seq?page=5">7</a>
+  </div> -->
 
 
 
+  </body>
 
-</body>
-
-</html>
+  </html>
