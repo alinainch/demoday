@@ -40,6 +40,10 @@
     <ul>
       <li><%=sequence.poses[i].poseName%></li>
       <li><img src="<%=sequence.poses[i].poseImg%>"></li>
+			<form action="/seq/deletePose/<%=sequence.poses[1]._id%>?_method=DELETE" method="POST"
+				class="col-3">
+				<button class="button large">Trash</button>
+			</form>
     </ul>
   <% } %>
 

@@ -16,4 +16,8 @@ router.put("/addPose", ensureAuth, seqController.addPose);
 
 router.get("/:id", ensureAuth, seqController.getSeq);
 
+router.delete("/deleteSeq/:id", seqController.deleteSeq);
+
+router.delete("/deletePose/:postID/:poseID", seqController.deletePose);
+
 module.exports = router;

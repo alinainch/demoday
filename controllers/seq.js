@@ -15,7 +15,8 @@ module.exports = {
   get: async (req, res) => {
     try {
       const sequences = await Seq.find({madeBy: req.user.id})
-      res.render("seq.ejs", { allPoses: posesObj.slice(0, 20), sequences: sequences});
+      const userInput = req.body.getNum
+      res.render("seq.ejs", { allPoses: posesObj.slice(0, userInput), sequences: sequences});
     } catch (err) {
       console.log(err);
     }
@@ -84,6 +85,30 @@ module.exports = {
       res.render('single.ejs', { sequence: sequence});
     } catch (err) {
       console.log(err);
+    }
+  },
+  deleteSeq: async (req, res) => {
+    try {
+      // Find post by id
+      let seq = await Seq.findById({ _id: req.params.id });
+      // Delete image from cloudinary
+      await cloudinary.uploader.destroy(seq.cloudinaryId);
+      // Delete post from db
+      await Seq.remove({ _id: req.params.id });
+      console.log("Deleted Post");
+      res.redirect("/seq");
+    } catch (err) {
+      res.redirect("/seq");
+    }
+  },
+  deletePose: async (req, res) => {
+    try {
+      // Find post by id
+      await Seq.remove({ _id: req.params.poseID });
+      console.log("Deleted Comment");
+      res.redirect(`/seq/${req.params.poseID}`);
+    } catch (err) {
+      res.redirect(`/seq/${req.params.poseID}`);
     }
   }
 }
