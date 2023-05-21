@@ -2,6 +2,7 @@ const Seq = require("../models/Seq")
 let posesObj = null
 const fs = require('fs');
 
+
 //cached on my disk. No need to fetch
 function getPoses(){
   if(!posesObj){
@@ -89,15 +90,12 @@ module.exports = {
   },
   deleteSeq: async (req, res) => {
     try {
-      // Find post by id
-      let seq = await Seq.findById({ _id: req.params.id });
-      // Delete image from cloudinary
-      await cloudinary.uploader.destroy(seq.cloudinaryId);
-      // Delete post from db
+      // Delete sequence from db
       await Seq.remove({ _id: req.params.id });
       console.log("Deleted Post");
       res.redirect("/seq");
     } catch (err) {
+      console.log(err)
       res.redirect("/seq");
     }
   },
