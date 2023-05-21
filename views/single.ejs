@@ -20,7 +20,7 @@
 				<li><a href="/media">MY MEDIA</a></li>
 				<li><a href="/cal">CALENDAR</a></li>
 				<li><a href="/profile">PROFILE</a></li>
-				<li><a href="/sequence">SEQUENCES</a></li>
+				<li><a href="/seq">SEQUENCES</a></li>
 				<li><a href="/faq">FAQ</a></li>
 			</ul>
 		</nav>
@@ -40,7 +40,7 @@
     <ul>
       <li><%=sequence.poses[i].poseName%></li>
       <li><img src="<%=sequence.poses[i].poseImg%>"></li>
-			<form action="/seq/deletePose/<%=sequence.poses[1]._id%>?_method=DELETE" method="POST"
+			<form action="/seq/deletePose/<%=sequence._id%>/<%=sequence.poses[i].poseID%>?_method=DELETE" method="POST"
 				class="col-3">
 				<button class="button large">Trash</button>
 			</form>

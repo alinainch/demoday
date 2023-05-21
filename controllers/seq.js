@@ -1,11 +1,14 @@
 const Seq = require("../models/Seq")
 let posesObj = null
 const fs = require('fs');
+const { ObjectID } = require("mongodb");
+
+
 
 
 //cached on my disk. No need to fetch
-function getPoses(){
-  if(!posesObj){
+function getPoses() {
+  if (!posesObj) {
     const data = fs.readFileSync('poses.json', 'utf8');
     posesObj = JSON.parse(data);
   }
@@ -15,9 +18,9 @@ getPoses()
 module.exports = {
   get: async (req, res) => {
     try {
-      const sequences = await Seq.find({madeBy: req.user.id})
+      const sequences = await Seq.find({ madeBy: req.user.id })
       const userInput = req.body.getNum
-      res.render("seq.ejs", { allPoses: posesObj.slice(0, userInput), sequences: sequences});
+      res.render("seq.ejs", { allPoses: posesObj.slice(0, userInput), sequences: sequences });
     } catch (err) {
       console.log(err);
     }
@@ -39,10 +42,10 @@ module.exports = {
     //get all the poses
     //assign a variable that will contain an array of 20 random poses
     //users can build their sequence
-    const sequences = await Seq.find({madeBy: req.user.id})
+    const sequences = await Seq.find({ madeBy: req.user.id })
     const userInput = req.body.getNum
     try {
-      res.render("seq.ejs", { allPoses: posesObj.slice(0, userInput), sequences: sequences});
+      res.render("seq.ejs", { allPoses: posesObj.slice(0, userInput), sequences: sequences });
     } catch (err) {
       console.log(err);
     }
@@ -55,12 +58,13 @@ module.exports = {
       let poseName = req.body.poseName
       let poseImg = req.body.poseImg
       let sequenceId = req.body.sequences
-      await Seq.findOneAndUpdate({ _id : sequenceId },
-      {
-        $push: {
-         poses: {poseName: poseName, poseImg: poseImg}
-        }
-      });
+      let poseID = new ObjectID()
+      await Seq.findOneAndUpdate({ _id: sequenceId },
+        {
+          $push: {
+            poses: { poseName: poseName, poseImg: poseImg, poseID: poseID }
+          }
+        });
       res.redirect('/seq')
     } catch (err) {
       console.log(err);
@@ -75,7 +79,7 @@ module.exports = {
         poses: []
       });
       console.log("Sequence has been added!");
-      res.redirect('/seq'); 
+      res.redirect('/seq');
     } catch (err) {
       console.log(err);
     }
@@ -83,7 +87,7 @@ module.exports = {
   getSeq: async (req, res) => {
     try {
       const sequence = await Seq.findById(req.params.id);
-      res.render('single.ejs', { sequence: sequence});
+      res.render('single.ejs', { sequence: sequence });
     } catch (err) {
       console.log(err);
     }
@@ -91,7 +95,7 @@ module.exports = {
   deleteSeq: async (req, res) => {
     try {
       // Delete sequence from db
-      await Seq.remove({ _id: req.params.id });
+      await Seq.findByIdAndDelete(req.params.id)
       console.log("Deleted Post");
       res.redirect("/seq");
     } catch (err) {
@@ -101,12 +105,22 @@ module.exports = {
   },
   deletePose: async (req, res) => {
     try {
-      // Find post by id
-      await Seq.remove({ _id: req.params.poseID });
-      console.log("Deleted Comment");
-      res.redirect(`/seq/${req.params.poseID}`);
+      //need to convert params.poseID to an objectid to match db! Otherwise would be a type mismatch and it was comparing a string 
+      let sequence = await Seq.findOneAndUpdate({ _id: req.params.seqID },
+        {
+          $pull: {
+            poses: { poseID: new ObjectID(req.params.poseID)}
+          }
+        },
+        { new: true }
+      );
+      console.log(sequence)
+      // Find sequence by id
+
+      console.log("Deleted Pose");
+      res.redirect(`/seq/${req.params.seqID}`);
     } catch (err) {
-      res.redirect(`/seq/${req.params.poseID}`);
+      res.redirect(`/seq/${req.params.seqID}`);
     }
   }
 }

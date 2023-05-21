@@ -47,6 +47,7 @@
               <!-- hide 2 inputs so we can send to backend but user won't see it -->
               <input id="poseName" class="hide" type="text" name="poseName" value="<%=allPoses[i].english_name%>">
               <input id="poseImg" class="hide" type="text" name="poseImg" value="<%=allPoses[i].url_svg%>">
+            
               <select name="sequences" id="seqID">
                 <option value=""></option>
                 <% for(let j=0; j < sequences.length; j++){ %>
