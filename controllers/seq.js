@@ -2,7 +2,11 @@ const Seq = require("../models/Seq")
 let posesObj = null
 const fs = require('fs');
 const { ObjectID } = require("mongodb");
+const openai = require('openai')
 
+const chatGPT = new openai.OpenAIApi(
+  new openai.Configuration({ apiKey: process.env.CHATGPT_KEY })
+);
 
 //cached on my disk. No need to fetch
 function getPoses() {
@@ -51,6 +55,35 @@ module.exports = {
       console.log(err);
     }
   },
+  getFeedback: async (req, res) => {
+    const sequence = await Seq.findById(req.params.id);
+    const question = req.body.question 
+    let feedback = "Unable to process your question right now. Please try again."
+    const sequenceStr = sequence.poses.map(pose => pose.poseName).join(',')
+    try {
+      let prompt = null 
+      if(question == "makeAdvanced"){
+        prompt = "How would I make this yoga sequence more advanced: " + sequenceStr
+      } else if(question == "beginner"){
+        prompt = "How would I make this yoga sequence more beginner friendly: " + sequenceStr
+      } 
+      if(prompt){
+        const completion = await chatGPT.createChatCompletion({
+          model: 'gpt-3.5-turbo',
+          messages: [{ role: 'user', content: prompt }],
+        });
+        feedback = completion.data.choices[0].message.content
+      }
+      console.log(feedback)
+      res.render("single.ejs", { allPoses: posesObj, sequence: sequence, question: question, feedback: feedback });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+
+
+
 
   addPose: async (req, res) => {
     //users can see all existing sequences 
@@ -88,7 +121,7 @@ module.exports = {
   getSeq: async (req, res) => {
     try {
       const sequence = await Seq.findById(req.params.id);
-      res.render('single.ejs', { sequence: sequence });
+      res.render('single.ejs', { sequence: sequence, feedback: null });
     } catch (err) {
       console.log(err);
     }

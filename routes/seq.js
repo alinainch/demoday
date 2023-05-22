@@ -12,6 +12,8 @@ router.get("/pose", ensureAuth, seqController.getPose);
 
 router.post("/newSeq", ensureAuth, seqController.newSeq);
 
+router.post("/getFeedback/:id", ensureAuth, seqController.getFeedback);
+
 router.post("/input", ensureAuth, seqController.posesArray);
 
 router.put("/addPose", ensureAuth, seqController.addPose);

@@ -5,7 +5,7 @@
 	<title>MINDFUL YOGI</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="../assets/css/main.css" />
+	<link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 
 <body class="single is-preload">
@@ -36,23 +36,44 @@
 		</nav>
 	</header>
 
-  <% for(let i=0; i < sequence.poses.length; i++){ %>
-    <ul>
-      <li><%=sequence.poses[i].poseName%></li>
-      <li><img src="<%=sequence.poses[i].poseImg%>"></li>
-			<form action="/seq/deletePose/<%=sequence._id%>/<%=sequence.poses[i].poseID%>?_method=DELETE" method="POST"
-				class="col-3">
-				<button class="button large">Trash</button>
-			</form>
-    </ul>
-  <% } %>
+	<%if(feedback){ %>
+		<pre class="feedback">
+			<%=feedback%>
+		</pre>
+	<% }%>
 
 
-  <script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+			<% for(let i=0; i < sequence.poses.length; i++){ %>
+				<ul>
+					<li>
+						<%=sequence.poses[i].poseName%>
+					</li>
+					<li><img src="<%=sequence.poses[i].poseImg%>"></li>
+					<form action="/seq/deletePose/<%=sequence._id%>/<%=sequence.poses[i].poseID%>?_method=DELETE" method="POST"
+						class="col-3">
+						<button class="button large">Trash</button>
+					</form>
+				</ul>
+				<% } %>
+
+
+
+					<form action="/seq/getFeedback/<%=sequence._id%>" method="POST">
+						<select name="question" id="question">
+							<option value="makeAdvanced">How would I make this more advanced?</option>
+							<option value="beginner">How would I make this more beginner friendly?</option>
+						</select>
+						<button type="submit">Get Feedback</button>
+					</form>
+
+
+
+
+					<script src="assets/js/jquery.min.js"></script>
+					<script src="assets/js/browser.min.js"></script>
+					<script src="assets/js/breakpoints.min.js"></script>
+					<script src="assets/js/util.js"></script>
+					<script src="assets/js/main.js"></script>
 
 </body>
 

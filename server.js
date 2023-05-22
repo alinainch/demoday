@@ -73,9 +73,5 @@ app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");
 });
 
-//Use chatGPT
-const openai = require('openai')
-const chatGPT = new openai.OpenAIApi(
-  new openai.Configuration({ apiKey: process.env.CHATGPT_KEY })
-);
+
 
