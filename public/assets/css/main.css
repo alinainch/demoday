@@ -3613,9 +3613,27 @@ input, select, textarea {
 
 		}
 
+		.seqLinks, .seqForms, .seqPoses{
+			width: 80% !important;
+			margin-left: auto !important;
+			margin-right: auto !important;
+			text-align: center !important;
+		
+		}
+
 		.seqLinks{
-			display: flex;
-			justify-content: center;
-			align-items: flex-end;
-			border: 1px solid red;
+			display: flex !important;
+			justify-content: center !important;
+			align-items: flex-end !important;
+
+		}
+		.posesCard{
+			width: 18%;
+			float: left;
+		
+			margin: 1%;
+		}
+		
+		.posesCard img{
+			width: 100%;
 		}
