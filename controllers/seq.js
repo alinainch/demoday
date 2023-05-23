@@ -2,7 +2,8 @@ const Seq = require("../models/Seq")
 let posesObj = null
 const fs = require('fs');
 const { ObjectID } = require("mongodb");
-const openai = require('openai')
+const openai = require('openai');
+const { isNull } = require("util");
 
 const chatGPT = new openai.OpenAIApi(
   new openai.Configuration({ apiKey: process.env.CHATGPT_KEY })
@@ -44,14 +45,11 @@ module.exports = {
     }
   },
   getMedia: async (req, res) => {
-    //get all the poses
-    //assign a variable that will contain an array of 20 random poses
-    //users can build their sequence
+    const yogaObj = null
     try {
-      const yogaObj = {}
-      res.render("media.ejs", { yogaObj: yogaObj });
+      res.render("media.ejs", {yogaObj: yogaObj});
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   },
 

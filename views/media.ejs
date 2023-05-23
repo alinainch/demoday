@@ -49,17 +49,19 @@
         </header>
 
 
- <form action="/seq/pose?_method=GET" method="POST">
+ <form action="/seq/pose" method="POST">
     <input name="pose" type="text">
     <button type="submit">Check</button>
   </form> 
 
  <!-- Just for searching the API  -->
-  
-    <p><%=yogaObj.english_name%></p>
-    <img src="<%=yogaObj.url_svg%>">
-    <p>Description: <%=yogaObj.pose_description%></p>
-    <p>Benefits: <%=yogaObj.pose_benefits%></p>
+    <%if(yogaObj != null) { %>
+
+        <p><%=yogaObj.english_name%></p>
+        <img src="<%=yogaObj.url_svg%>">
+        <p>Description: <%=yogaObj.pose_description%></p>
+        <p>Benefits: <%=yogaObj.pose_benefits%></p>
+   <% } %>
   
 </body>
 </html>

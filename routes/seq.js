@@ -8,7 +8,7 @@ router.get("/", ensureAuth, seqController.get);
 
 router.post("/", ensureAuth, seqController.get);
 
-router.get("/pose", ensureAuth, seqController.getPose);
+router.post("/pose", ensureAuth, seqController.getPose);
 
 router.get("/media", ensureAuth, seqController.getMedia);
 
