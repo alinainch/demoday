@@ -24,7 +24,7 @@ module.exports = {
       const sequences = await Seq.find({ madeBy: req.user.id })
       let page = +req.query.page || 1 
       console.log(page)
-      res.render("seq.ejs", { allPoses: posesObj.slice((page - 1)* posesPerPage, page * posesPerPage ), sequences: sequences, pages: Math.ceil(posesObj.length / posesPerPage), posesPerPage: posesPerPage});
+      res.render("seq.ejs", { allPoses: posesObj.slice((page - 1)* posesPerPage, page * posesPerPage ), sequences: sequences, pages: Math.ceil(posesObj.length / posesPerPage), posesPerPage: posesPerPage, yogaObj: null});
     
     } catch (err) {
       console.log(err);
@@ -38,11 +38,23 @@ module.exports = {
       const userInput = req.body.pose
       const yoga = await fetch(`https://yoga-api-nzy4.onrender.com/v1/poses?name=${userInput}`);
       const yogaObj = await yoga.json()
-      res.render("seq.ejs", { yogaObj: yogaObj });
+      res.render("media.ejs", { yogaObj: yogaObj });
     } catch (err) {
       console.log(err);
     }
   },
+  getMedia: async (req, res) => {
+    //get all the poses
+    //assign a variable that will contain an array of 20 random poses
+    //users can build their sequence
+    try {
+      const yogaObj = {}
+      res.render("media.ejs", { yogaObj: yogaObj });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   posesArray: async (req, res) => {
     //get all the poses
     //assign a variable that will contain an array of 20 random poses

@@ -10,6 +10,8 @@ router.post("/", ensureAuth, seqController.get);
 
 router.get("/pose", ensureAuth, seqController.getPose);
 
+router.get("/media", ensureAuth, seqController.getMedia);
+
 router.post("/newSeq", ensureAuth, seqController.newSeq);
 
 router.post("/getFeedback/:id", ensureAuth, seqController.getFeedback);
