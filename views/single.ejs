@@ -6,35 +6,36 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="/assets/css/main.css" />
+	<link rel="stylesheet" href="/assets/css/carousel.css" />
 </head>
 
-<body class="single is-preload">
+<body>
+	
+		<!-- Header -->
+		<header id="header">
+			<h1><a href="/feed">Mindful Yogi</a></h1>
+			<nav class="links">
+				<ul>
+					<li><a href="/tracker">DAILY LOG</a></li>
+					<li><a href="/media">MY MEDIA</a></li>
+					<li><a href="/cal">CALENDAR</a></li>
+					<li><a href="/profile">PROFILE</a></li>
+					<li><a href="/seq">SEQUENCES</a></li>
+					<li><a href="/faq">FAQ</a></li>
+				</ul>
+			</nav>
+			<nav class="main">
+				<ul>
+					<li class="search">
+						<a class="fa-search" href="#search">Search</a>
+						<form id="search" method="get" action="#">
+							<input type="text" name="query" placeholder="Search" />
+						</form>
+					</li>
+				</ul>
+			</nav>
+		</header>
 
-
-	<!-- Header -->
-	<header id="header">
-		<h1><a href="/feed">Mindful Yogi</a></h1>
-		<nav class="links">
-			<ul>
-				<li><a href="/tracker">DAILY LOG</a></li>
-				<li><a href="/media">MY MEDIA</a></li>
-				<li><a href="/cal">CALENDAR</a></li>
-				<li><a href="/profile">PROFILE</a></li>
-				<li><a href="/seq">SEQUENCES</a></li>
-				<li><a href="/faq">FAQ</a></li>
-			</ul>
-		</nav>
-		<nav class="main">
-			<ul>
-				<li class="search">
-					<a class="fa-search" href="#search">Search</a>
-					<form id="search" method="get" action="#">
-						<input type="text" name="query" placeholder="Search" />
-					</form>
-				</li>
-			</ul>
-		</nav>
-	</header>
 
 	<%if(feedback){ %>
 		<pre class="feedback">
@@ -44,36 +45,49 @@
 
 
 			<% for(let i=0; i < sequence.poses.length; i++){ %>
-				<ul>
-					<li>
-						<%=sequence.poses[i].poseName%>
-					</li>
-					<li><img src="<%=sequence.poses[i].poseImg%>"></li>
-					<form action="/seq/deletePose/<%=sequence._id%>/<%=sequence.poses[i].poseID%>?_method=DELETE" method="POST"
-						class="col-3">
-						<button class="button large">Trash</button>
-					</form>
-				</ul>
-				<% } %>
+				<div class="splide__wrapper">
+					<div class="splide" role="group" aria-label="Splide Basic HTML Example">
+						<div class="splide__track">
+							<ul class="splide__list">
+								<li class="splide__slide">
+									<div class="card">
+										<img class="card__image" src="<%=sequence.poses[i].poseImg%>" />
+										<div class="card__content">
+											<h3 class="card__title">
+												<%=sequence.poses[i].poseName%>
+											</h3>
+										</div>
+									</div>
+								</li>
+						</div>
+
+
+						<form action="/seq/deletePose/<%=sequence._id%>/<%=sequence.poses[i].poseID%>?_method=DELETE" method="POST"
+							class="col-3">
+							<button class="button large">Trash</button>
+						</form>
+						</ul>
+						<% } %>
 
 
 
-					<form action="/seq/getFeedback/<%=sequence._id%>" method="POST">
-						<select name="question" id="question">
-							<option value="makeAdvanced">How would I make this more advanced?</option>
-							<option value="beginner">How would I make this more beginner friendly?</option>
-						</select>
-						<button type="submit">Get Feedback</button>
-					</form>
+							<form action="/seq/getFeedback/<%=sequence._id%>" method="POST">
+								<select name="question" id="question">
+									<option value="makeAdvanced">How would I make this more advanced?</option>
+									<option value="beginner">How would I make this more beginner friendly?</option>
+								</select>
+								<button type="submit">Get Feedback</button>
+							</form>
 
 
 
 
-					<script src="assets/js/jquery.min.js"></script>
-					<script src="assets/js/browser.min.js"></script>
-					<script src="assets/js/breakpoints.min.js"></script>
-					<script src="assets/js/util.js"></script>
-					<script src="assets/js/main.js"></script>
+							<script src="assets/js/jquery.min.js"></script>
+							<script src="assets/js/browser.min.js"></script>
+							<script src="assets/js/breakpoints.min.js"></script>
+							<script src="assets/js/util.js"></script>
+							<script src="assets/js/carousel.js"></script>
+							
 
 </body>
 

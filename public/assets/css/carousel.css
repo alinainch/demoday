@@ -1,0 +1,47 @@
+body{
+  margin:50px 0;
+  font:16px / 1.2 sans-serif;
+  
+  /* Overflow needed when disable the splide__track */
+  overflow-x: hidden;
+}
+img{
+  width: 20%;
+}
+
+.splide{
+/* Center the splide */
+  margin-inline: auto;
+}
+
+/* show overflow items */
+.splide__track{
+  overflow: initial;
+}
+
+/* Display pagination below items instead on top */
+.splide__pagination{
+  bottom: initial;
+  top: calc(100% + 10px);
+}
+
+/* Change active pagination */
+.splide__pagination__page.is-active{
+  background-color:#333;
+}
+
+/* Card styling */
+.card{
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+  border-radius:4px;
+  overflow: hidden;
+  cursor:pointer;
+}
+
+.card__content{
+  padding: clamp(20px, 4vw, 30px);
+}
+
+.card__title{
+  margin-block: 0 10px;
+}
