@@ -18,10 +18,7 @@
     <link rel="icon" href="/images/yoga.jpg">
 </head>
 
-<body class="is-preload">
-
-    <!-- Wrapper -->
-    <div>
+<body class="is-preload" id="mediaBod">
 
         <!-- Header -->
         <header id="header">
@@ -49,20 +46,25 @@
         </header>
 
 
- <form action="/seq/pose" method="POST">
-    <input name="pose" type="text">
-    <button type="submit">Check</button>
+ <form id="mediaForm" action="/seq/pose" method="POST">
+    <input id="mediaInput" name="pose" type="text" placeholder="Quick Lookup">
+    <button id="mediaBtn" type="submit">Check</button>
   </form> 
 
  <!-- Just for searching the API  -->
-    <%if(yogaObj != null) { %>
-
-        <p><%=yogaObj.english_name%></p>
-        <p><%=yogaObj.sanskrit_name%></p>
-        <p><%=yogaObj.translation_name%></p>
-        <img src="<%=yogaObj.url_svg%>">
-        <p>Description: <%=yogaObj.pose_description%></p>
-        <p>Benefits: <%=yogaObj.pose_benefits%></p>
+ <section class="mediaParent">
+    <section class="mediaCard">
+        <%if(yogaObj != null) { %>
+            <p><%=yogaObj.english_name%></p>
+            <p><%=yogaObj.sanskrit_name%></p>
+            <p><%=yogaObj.translation_name%></p>
+            <img src="<%=yogaObj.url_svg%>">
+            <span>Description</span>
+            <p><%=yogaObj.pose_description%></p>
+            <span>Benefits</span>
+            <p><%=yogaObj.pose_benefits%></p>
+        </section>
+</section>
         
    <% } %>
   

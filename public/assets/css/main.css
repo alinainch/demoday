@@ -32,6 +32,93 @@ footer, header, hgroup, menu, nav, section {
 .hide{
 	display: none !important;
 }
+.seqLinks, .seqForms, .seqPoses{
+	width: 80% !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	text-align: center !important;
+
+}
+
+.seqLinks{
+	display: flex !important;
+	justify-content: center !important;
+	align-items: flex-end !important;
+
+}
+.posesCard, .mediaCard{
+	width: 18%;
+	float: left;
+	margin: 1%;
+	box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+	border-radius:5px;
+	overflow: hidden;
+	cursor:pointer;
+	margin-bottom: 50px;
+	text-align: center;
+	background-color: white;
+}
+
+
+.posesCard img{
+	width: 100%;
+	
+}
+
+#question, #input{
+	width: 20%;
+	margin: 20px;
+	display: inline;
+}
+
+#op{
+	width: 10%;
+	display: inline;
+}
+.feedbackBtn{
+	width: 10%;
+}
+
+#seqBtn{
+	margin-top: 10px;
+	background-color:#f4f4f4;
+	border:rgba(160, 160, 160, 0.65);
+}
+#mediaInput{
+	margin-top: 20px;
+	width: 15%;
+	display: inline;
+}
+#mediaBtn{
+	margin: 10px;
+	margin-top: 29px;
+}
+#mediaForm{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#mediaBod{
+	
+	height: 1800px;
+	background-color: white;
+	color: #3c3b3b;
+	margin: 0 0 1em 0;
+}
+.mediaParent{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.mediaCard{
+	width: 35%;
+	height: 1000px;
+	margin: 0 auto;
+}
+.mediaCard img{
+	height: 300px;
+	width: 100%;
+}
 body {
 	line-height: 1;
 }
@@ -3612,31 +3699,5 @@ input, select, textarea {
 			}
 
 		}
-
-		.seqLinks, .seqForms, .seqPoses{
-			width: 80% !important;
-			margin-left: auto !important;
-			margin-right: auto !important;
-			text-align: center !important;
-		
-		}
-
-		.seqLinks{
-			display: flex !important;
-			justify-content: center !important;
-			align-items: flex-end !important;
-
-		}
-		.posesCard{
-			width: 18%;
-			float: left;
-			
-			margin: 1%;
-		}
-		
-		.posesCard img{
-			width: 100%;
-		}
-
 
 		

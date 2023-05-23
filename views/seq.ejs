@@ -66,12 +66,12 @@
       <% } %>
 
         <form action="/seq/newSeq" method="POST">
-          <input type="text" name="title" placeholder="Title">
-          <button type="submit">add seq</button>
+          <input type="text" name="title" id="input" placeholder="New Sequence">
+          <button type="submit">Add</button>
         </form>
         <form action="/seq" method="POST">
-          <input type="number" name="getNum" value="<%=posesPerPage%>">
-          <button type="submit">Submit num</button>
+          <input type="number"  id="input" name="getNum" value="<%=posesPerPage%>">
+          <button type="submit">Generate</button>
         </form>
   </div>
 
@@ -96,12 +96,12 @@
             <select name="sequences" id="seqID">
               <option value=""></option>
               <% for(let j=0; j < sequences.length; j++){ %>
-                <option value="<%=sequences[j]._id%>">
+                <option id="op" value="<%=sequences[j]._id%>">
                   <%=sequences[j].title%>
                 </option>
                 <% } %>
             </select>
-            <button id="seqBtn" class="btn" type="submit" class="btn btn-primary" value="Upload">+</button>
+            <button id="seqBtn" type="submit" class="btn btn-primary" value="Upload">+</button>
           </div>
         </form>
       </section>
