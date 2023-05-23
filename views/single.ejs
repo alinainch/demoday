@@ -73,8 +73,11 @@
 
 							<form action="/seq/getFeedback/<%=sequence._id%>" method="POST">
 								<select name="question" id="question">
-									<option value="makeAdvanced">How would I make this more advanced?</option>
 									<option value="beginner">How would I make this more beginner friendly?</option>
+									<option value="makeAdvanced">How would I make this more advanced?</option>
+									<option value="mod">Suggest modifications or variations</option>
+									<option value="music">Generate a playlist for me to exercise to</option>
+									<option value="tips">Give me tips on how to do each pose</option>
 								</select>
 								<button type="submit">Get Feedback</button>
 							</form>

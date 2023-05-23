@@ -76,7 +76,13 @@ module.exports = {
         prompt = "How would I make this yoga sequence more advanced: " + sequenceStr
       } else if(question == "beginner"){
         prompt = "How would I make this yoga sequence more beginner friendly: " + sequenceStr
-      } 
+      } else if(question == "mod"){
+        prompt = "suggest modifications or variations for this yoga flow sequence: " + sequenceStr
+      } else if(question == "music"){
+        prompt = "Generate a  6 song playlist for me to exercise to based off these yoga poses: " + sequenceStr
+      } else if(question == "tips"){
+        prompt = "Give me tips on how to do each yoga pose in this sequence: " + sequenceStr
+      }
       if(prompt){
         const completion = await chatGPT.createChatCompletion({
           model: 'gpt-3.5-turbo',
