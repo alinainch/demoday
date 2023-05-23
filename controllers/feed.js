@@ -19,11 +19,12 @@ module.exports = {
   },
   getCategory: async (req, res) => {
     try {
+      const allUsers = await User.find();
       const posts = await Post.find({category: req.params.category}).sort({ createdAt: "desc" }).lean();
       const logs = await Tracker.find({ user: req.user.id }).sort({ createdAt: "desc" }).lean();
       const comments = await Comment.find();
     
-      res.render("category.ejs", { posts: posts, user: req.user, logs: logs, comments: comments});
+      res.render("category.ejs", { posts: posts, user: req.user, logs: logs, comments: comments, allUsers: allUsers});
     } catch (err) {
       console.log(err);
     }

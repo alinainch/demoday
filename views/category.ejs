@@ -52,7 +52,10 @@
 											</h2>
 										</div>
 										<div class="meta">
-												<a href="/profile/<%= posts[i].user %>" class="author"><span class="name"><%= posts[i].userName %></span><img src="../images/yoga.jpg" alt="" /></a>
+												<a href="/profile/<%= posts[i].user %>" class="author"><span class="name"><%= posts[i].userName %></span>
+												<% for(let j=0; j < allUsers.length; j++){ %>
+													<img src="<%=allUsers[j].userName === posts[i].userName ? allUsers[j].profilePic : null%>" alt="" />
+												<% } %>
 										</div>
 									</header>
 										<a href="/post/<%= posts[i]._id%>" class="image featured"><img src="<%= posts[i].image%>" alt="" /></a>
@@ -105,7 +108,11 @@
 												<time class="published" datetime="2015-10-20"><%=logs[i].date.toISOString().split('T')[0]%></time>
 												
 											</header>
-											<a href="single.html" class="image"><img src="../images/pic08.jpg" alt="" /></a>
+											<a href="single.html" class="image">
+												<% for(let j=0; j < allUsers.length; j++){ %>
+													<img src="<%=allUsers[j].userName === logs[i].userName ? allUsers[j].profilePic : null%>" alt="" />
+												<% } %>
+											</a>
 										</article>
 									</li>
 								</ul>
