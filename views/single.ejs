@@ -1,95 +1,110 @@
 <!DOCTYPE HTML>
 <html>
 
-<head>
-	<title>MINDFUL YOGI</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="/assets/css/main.css" />
-	<link rel="stylesheet" href="/assets/css/carousel.css" />
-	<link rel="icon" href="/images/yoga.jpg">
+	
+	<head>
+		<title>MINDFUL YOGI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/carousel.css" />
+		<link rel="icon" href="/images/yoga.jpg">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
+		integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+		integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 
 <body>
-	
-		<!-- Header -->
-		<header id="header">
-			<h1><a href="/feed">Mindful Yogi</a></h1>
-			<nav class="links">
-				<ul>
-					<li><a href="/tracker">DAILY LOG</a></li>
-					<li><a href="/seq/media">MY MEDIA</a></li>
-					<li><a href="/cal">CALENDAR</a></li>
-					<li><a href="/profile">PROFILE</a></li>
-					<li><a href="/seq">SEQUENCES</a></li>
-					<li><a href="/faq">FAQ</a></li>
-				</ul>
-			</nav>
-			<nav class="main">
-				<ul>
-					<li class="search">
-						<a class="fa-search" href="#search">Search</a>
-						<form id="search" method="get" action="#">
-							<input type="text" name="query" placeholder="Search" />
-						</form>
-					</li>
-				</ul>
-			</nav>
-		</header>
-		
-		
-									<form action="/seq/getFeedback/<%=sequence._id%>" method="POST">
-										<select name="question" id="question">
-											<option value="beginner">How would I make this more beginner friendly?</option>
-											<option value="makeAdvanced">How would I make this more advanced?</option>
-											<option value="mod">Suggest modifications or variations</option>
-											<option value="music">Generate a playlist for me to exercise to</option>
-											<option value="tips">Give me tips on how to do each pose</option>
-										</select>
-										<button type="submit">Get Feedback</button>
-									</form>
-		
-		<%if(feedback){ %>
-			<pre class="feedback">
+
+	<!-- Header -->
+	<header id="header">
+		<h1><a href="/feed">Mindful Yogi</a></h1>
+		<nav class="links">
+			<ul>
+				<li><a href="/tracker">DAILY LOG</a></li>
+				<li><a href="/seq/media">MY MEDIA</a></li>
+				<li><a href="/cal">CALENDAR</a></li>
+				<li><a href="/profile">PROFILE</a></li>
+				<li><a href="/seq">SEQUENCES</a></li>
+				<li><a href="/faq">FAQ</a></li>
+			</ul>
+		</nav>
+		<nav class="main">
+			<ul>
+				<li class="search">
+					<a class="fa-search" href="#search">Search</a>
+					<form id="search" method="get" action="#">
+						<input type="text" name="query" placeholder="Search" />
+					</form>
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+
+	<form action="/seq/getFeedback/<%=sequence._id%>" method="POST">
+		<select name="question" id="question">
+			<option value="beginner">How would I make this more beginner friendly?</option>
+			<option value="makeAdvanced">How would I make this more advanced?</option>
+			<option value="mod">Suggest modifications or variations</option>
+			<option value="music">Generate a playlist for me to exercise to</option>
+			<option value="tips">Give me tips on how to do each pose</option>
+		</select>
+		<button type="submit">Get Feedback</button>
+	</form>
+
+	<%if(feedback){ %>
+		<pre class="feedback">
 				<%=feedback%>
 			</pre>
-	<% }%>
+		<% }%>
 
 
 			<% for(let i=0; i < sequence.poses.length; i++){ %>
-				<div class="splide__wrapper">
-					<div class="splide" role="group" aria-label="Splide Basic HTML Example">
-						<div class="splide__track">
-							<ul class="splide__list">
-								<li class="splide__slide">
-									<div class="card">
-										<img class="card__image" src="<%=sequence.poses[i].poseImg%>" />
-										<div class="card__content">
-											<h3 class="card__title">
-												<%=sequence.poses[i].poseName%>
-											</h3>
-											<form action="/seq/deletePose/<%=sequence._id%>/<%=sequence.poses[i].poseID%>?_method=DELETE" method="POST"
-												class="col-3">
-												<button class="button large">Trash</button>
-											</form>
-											</ul>
+
+				<%=sequence.poses[i].poseName%>
+
+					<% } %>
+
+						<div class="container">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="center">
+										<div class="card">
+											<img src="https://picsum.photos/300/200?random=1" alt="..." />
+										</div>
+										<div class="card">
+											<img src="https://picsum.photos/300/200?random=3" alt="..." />
+										</div>
+										<div class="card">
+											<img src="https://picsum.photos/300/200?random=2" alt="..." />
+										</div>
+										<div class="card">
+											<img src="https://picsum.photos/300/200?random=4" alt="..." />
+										</div>
+										<div class="card">
+											<img src="https://picsum.photos/300/200?random=1" alt="..." />
+										</div>
+										<div class="card">
+											<img src="https://picsum.photos/300/200?random=1" alt="..." />
 										</div>
 									</div>
-								</li>
+								</div>
+							</div>
 						</div>
-						<% } %>
-
-					</div>
-				</div>
 
 
-							<script src="assets/js/jquery.min.js"></script>
-							<script src="assets/js/browser.min.js"></script>
-							<script src="assets/js/breakpoints.min.js"></script>
-							<script src="assets/js/util.js"></script>
-							<script src="assets/js/carousel.js"></script>
-							
-
+						<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+							integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
+							crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+						<script src="../assets/js/carousel.js"></script>
 </body>
 
 </html>

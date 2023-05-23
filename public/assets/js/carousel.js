@@ -1,22 +1,33 @@
-document.addEventListener( 'DOMContentLoaded', function() {
-  var splide = new Splide( '.splide', {
-    type   : 'slide',
-    perPage : 3,
-    perMove : 1,
-    gap : '15px',
-    width : 'min(1200px, 100% - 60px)',
-    // rewind     : true,
-    breakpoints: {
-      992: {
-        perPage: 2,
-      }, 
-      480: {
-        perPage: 1,
-        rewind : true,
+$(document).ready(function () {
+  $(".center").slick({
+    centerMode: true,
+    centerPadding: "0px",
+    dots: true,
+    slidesToScroll: 1,
+    slidesToShow: 5,
+    prevArrow:
+      '<span class="priv_arrow"> <i class="fa fa-chevron-left" aria-hidden="true"></i></span>',
+    nextArrow:
+      '<span class="next_arrow"> <i class="fa fa-chevron-right" aria-hidden="true"></i></span>',
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: true,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 1,
+        },
       },
-    }
-  } );
-  splide.mount();
-  
-} );
-
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: true,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 1,
+        },
+      },
+    ],
+  });
+});

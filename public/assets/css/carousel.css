@@ -1,47 +1,89 @@
-body{
-  margin:50px 0;
-  font:16px / 1.2 sans-serif;
-  
-  /* Overflow needed when disable the splide__track */
-  overflow-x: hidden;
+.center .card {
+  position: relative;
+  width: 255px;
+  height: 186px;
+
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 0px 57px rgba(37, 13, 97, 0.08);
+  backdrop-filter: blur(2px);
+
+  border-radius: 20px;
 }
-img{
-  width: 20%;
+.card {
+  /* position: relative; */
 }
 
-.splide{
-/* Center the splide */
-  margin-inline: auto;
+.card img {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  margin-top: 30px;
+}
+.fa-chevron-left:before {
+  position: absolute;
+  top: 150px;
+}
+.fa-chevron-right:before {
+  position: absolute !important;
+  right: 10px;
+  top: 150px;
+}
+.controls .next {
 }
 
-/* show overflow items */
-.splide__track{
-  overflow: initial;
+.slider {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  z-index: 99;
+  transform: translateX(-50%);
+  width: 180px;
+
+  height: 20px;
 }
 
-/* Display pagination below items instead on top */
-.splide__pagination{
-  bottom: initial;
-  top: calc(100% + 10px);
+.slider .prev_arrow {
+  position: absolute;
+  right: -20px;
+}
+.slider .slider_item {
+}
+.slick-initialized .slick-slide {
+  padding: 40px !important;
+}
+.slick-dots li {
+  position: relative;
+  display: inline-block;
+  width: auto !important;
+  height: 20px;
+  margin: 0 5px;
+  padding: 0;
+  cursor: pointer;
+}
+.slick-arrow.priv_arrow {
+  position: relative;
+  z-index: 99;
+}
+.slick-dots .slick-active button {
+  background: #3e54ac !important;
+
+}
+.slick-current .card {
+  transform: scale(1.2);
 }
 
-/* Change active pagination */
-.splide__pagination__page.is-active{
-  background-color:#333;
+.slick-dots li button:before {
+  content: "" !important;
 }
+.slick-dots .slick-active button:active {
+   background: #3e54ac !important;
 
-/* Card styling */
-.card{
-  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-  border-radius:4px;
-  overflow: hidden;
-  cursor:pointer;
 }
-
-.card__content{
-  padding: clamp(20px, 4vw, 30px);
-}
-
-.card__title{
-  margin-block: 0 10px;
+.slick-dots li button {
+  width: 61px !important;
+  height: 8px !important;
+  left: 825px !important;
+  border: 20px !important;
+  background: #ecf2ff !important;
+  border-radius: 20px !important;
 }
