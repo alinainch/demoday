@@ -36,12 +36,23 @@
 				</ul>
 			</nav>
 		</header>
-
-
-	<%if(feedback){ %>
-		<pre class="feedback">
-			<%=feedback%>
-		</pre>
+		
+		
+									<form action="/seq/getFeedback/<%=sequence._id%>" method="POST">
+										<select name="question" id="question">
+											<option value="beginner">How would I make this more beginner friendly?</option>
+											<option value="makeAdvanced">How would I make this more advanced?</option>
+											<option value="mod">Suggest modifications or variations</option>
+											<option value="music">Generate a playlist for me to exercise to</option>
+											<option value="tips">Give me tips on how to do each pose</option>
+										</select>
+										<button type="submit">Get Feedback</button>
+									</form>
+		
+		<%if(feedback){ %>
+			<pre class="feedback">
+				<%=feedback%>
+			</pre>
 	<% }%>
 
 
@@ -57,33 +68,19 @@
 											<h3 class="card__title">
 												<%=sequence.poses[i].poseName%>
 											</h3>
+											<form action="/seq/deletePose/<%=sequence._id%>/<%=sequence.poses[i].poseID%>?_method=DELETE" method="POST"
+												class="col-3">
+												<button class="button large">Trash</button>
+											</form>
+											</ul>
 										</div>
 									</div>
 								</li>
 						</div>
-
-
-						<form action="/seq/deletePose/<%=sequence._id%>/<%=sequence.poses[i].poseID%>?_method=DELETE" method="POST"
-							class="col-3">
-							<button class="button large">Trash</button>
-						</form>
-						</ul>
 						<% } %>
 
-
-
-							<form action="/seq/getFeedback/<%=sequence._id%>" method="POST">
-								<select name="question" id="question">
-									<option value="beginner">How would I make this more beginner friendly?</option>
-									<option value="makeAdvanced">How would I make this more advanced?</option>
-									<option value="mod">Suggest modifications or variations</option>
-									<option value="music">Generate a playlist for me to exercise to</option>
-									<option value="tips">Give me tips on how to do each pose</option>
-								</select>
-								<button type="submit">Get Feedback</button>
-							</form>
-
-
+					</div>
+				</div>
 
 
 							<script src="assets/js/jquery.min.js"></script>

@@ -1,11 +1,12 @@
 const Tracker = require("../models/Tracker")
+const User = require("../models/User")
 
 module.exports = {
   get: async (req, res) => {
     try {
       const posts = await Tracker.find({ user: req.user.id }).sort({ createdAt: "desc" }).lean();
-      console.log(posts)
-      res.render("tracker.ejs", { tracker: posts, user: req.user });
+      
+      res.render("tracker.ejs", { tracker: posts, user: req.user});
     } catch (err) {
       console.log(err);
     }
