@@ -179,6 +179,8 @@ input, select, textarea {
 
 	p {
 		margin: 0 0 2em 0;
+		color:#636363;
+
 	}
 
 		p.content {
@@ -315,7 +317,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #ffffff;
+		color:#636363;
 	}
 
 	blockquote {
@@ -2283,6 +2285,7 @@ input, select, textarea {
 
 			.icon.alt:before {
 				display: block;
+				color:#636363;
 				font-size: 1.25em;
 				width: 2em;
 				height: 2em;
@@ -2453,12 +2456,14 @@ input, select, textarea {
 
 	dl {
 		margin: 0 0 2em 0;
+		color:#636363;
 	}
 
 		dl dt {
 			display: block;
 			font-weight: 400;
 			margin: 0 0 1em 0;
+			color:#636363;
 		}
 
 		dl dd {
@@ -2471,6 +2476,7 @@ input, select, textarea {
 			margin: 0;
 			clear: left;
 			float: left;
+			color:#636363;
 		}
 
 		dl.alt dd {
@@ -3215,13 +3221,13 @@ input, select, textarea {
 		-webkit-transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
 		-ms-transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
 		transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
-		background-color: #ffffff;
+		background-color: #f7b598;
 		color: #636363;
 		position: absolute;
 		width: 64em;
 		max-width: calc(100% - 4em);
 		padding: 1em;
-		background-color: #f7f7f7;
+		
 		border-top-left-radius: 0.25em;
 		border-top-right-radius: 0.25em;
 		cursor: default;
@@ -3411,7 +3417,7 @@ input, select, textarea {
 			#main input[type="button"].primary,
 			#main button.primary,
 			#main .button.primary {
-				background-color: #8cc9f0;
+				background-color:#f7b598;
 				color: #ffffff !important;
 				box-shadow: none;
 			}

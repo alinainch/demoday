@@ -24,9 +24,7 @@
 							<% for(let j=0; j < allUsers.length; j++){ %>
 								<img src="<%=allUsers[j].userName === posts[i].userName ? allUsers[j].profilePic : null%>" alt="" />
 								<% } %>
-									<time class="author">
-										<%= posts[i].createdAt.toISOString().split('T')[0] %>
-									</time>
+									
 						</a>
 
 					</div>
