@@ -29,7 +29,6 @@ module.exports = {
     try {
       // Delete post from db
       await Tracker.remove({ _id: req.params.id });
-      console.log("Deleted Post");
       res.redirect("/tracker");
     } catch (err) {
       res.redirect("/tracker");
