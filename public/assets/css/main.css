@@ -37,7 +37,7 @@ footer, header, hgroup, menu, nav, section {
 	border-radius: 5px;
 	margin: 10px;
 	width: 50%;
-	box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+	box-shadow: 0 5px 10px rgba(62, 61, 61, 0.3);
 }
 .trackUl{
 	list-style: none;
@@ -46,13 +46,28 @@ footer, header, hgroup, menu, nav, section {
 	justify-content: center;
 	align-items: center;
 }
+.trackerParent{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+#trackForm, #trackDate{
+	width: 400%;
+	background-color: white;
+	box-shadow: 0 5px 10px rgba(62, 61, 61, 0.3);
+	margin: 10px;
+}
+#trackDate{
+	width: 50%;
+	border: none;
+}
 ul.trackUl {
 	list-style: none;
 	padding: 0;
 }
 
 	ul.trackUl li {
-		border-top: dotted 1px rgba(160, 160, 160, 0.3);
+		border-top: dotted 1px rgba(188, 188, 188, 0.3);
 		margin: 1.5em 0 0 0;
 		padding: 1.5em 0 0 0;
 	}
@@ -175,18 +190,25 @@ ul.trackUl {
 #genSeq{
 	width: 6.75%;
 }
-#seqBtn{
+#seqBtn, #trackBtn{
 	margin-top: 10px;
 	background-color: rgb(207, 247, 207);
 	border:rgba(160, 160, 160, 0.65);
+}
+
+#trackBtn{
+	margin-left: 10px;
+	display: inline;
 }
 #mediaInput{
 	margin-top: 20px;
 	width: 15%;
 	display: inline;
+	background-color: white;
 }
 #mediaBtn{
 	margin: 10px;
+	background-color: rgb(207, 247, 207);
 	margin-top: 29px;
 }
 #mediaForm{

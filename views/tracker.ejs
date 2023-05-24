@@ -36,6 +36,20 @@
       </nav>
       </header>
   
+      <% if (user.email) {
+        const today = new Date()
+      %>
+      <div class="trackerParent">
+  
+        <form class="mt-3" action="/tracker" method="POST">
+          <div class="form-group">
+            <input type="text" id="trackForm" class="form-control" placeholder="Enter Log" name="log">
+            <input type="date" id="trackDate" value="<%=today.toISOString().split('T')[0]%>" name="date">
+          </div>
+          <button type="submit" id="trackBtn" class="btn btn-primary">Submit</button>
+        </form>
+        <% } %>
+      </div>
       <% for(let i=0; i<tracker.length; i++) {%>
         <section>
           <ul class="trackUl">
@@ -62,17 +76,6 @@
 
      
 
-    <% if (user.email) {
-      const today = new Date()
-      %>
-      <form class="mt-3" action="/tracker" method="POST">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Enter Log" name="log">
-          <input type="date" value="<%=today.toISOString().split('T')[0]%>"class="form-control" name="date">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    <% } %>
   </div>
 
  
