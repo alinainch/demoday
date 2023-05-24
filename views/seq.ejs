@@ -3,130 +3,142 @@
 
 <head>
 
-    <link rel="stylesheet" href="/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.6/dist/full.css" rel="stylesheet" type="text/css" />
-    <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="/evo-calendar.min.css" />
-    <!-- Optional Themes -->
-    <link rel="stylesheet" href="/evo-calendar.midnight-blue.min.css" />
-    <link rel="stylesheet" href="/assets/css/main.css" />
-    <title>Mindful Yogi</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="icon" href="images/yoga.jpg">
+  <link rel="stylesheet" href="/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.6/dist/full.css" rel="stylesheet" type="text/css" />
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="/evo-calendar.min.css" />
+  <!-- Optional Themes -->
+  <link rel="stylesheet" href="/evo-calendar.midnight-blue.min.css" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <title>Mindful Yogi</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="icon" href="images/yoga.jpg">
 </head>
 
 <body class="is-preload">
 
-    <!-- Wrapper -->
-    <div>
+  <!-- Wrapper -->
+  <div>
 
-        <!-- Header -->
-        <header id="header">
-            <h1><a href="/feed">Mindful Yogi</a></h1>
-            <nav class="links">
-                <ul>
-                    <li><a href="/tracker">DAILY LOG</a></li>
-                    <li><a href="/seq/media">MY MEDIA</a></li>
-                    <li><a href="/cal">CALENDAR</a></li>
-                    <li><a href="/profile">PROFILE</a></li>
-                    <li><a href="/seq">SEQUENCES</a></li>
-                    <li><a href="https://alinainch.netlify.app/" target="_blank">FAQ</a></li>
-                </ul>
-            </nav>
-            <nav class="main">
-                <ul>
-                    <li>
-                        <a class="fa-search">Search</a>
-                        <form>
-                            <input type="text" id="searchid" name="category" placeholder="Search" />
-                        </form>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-
-
- 
+    <!-- Header -->
+    <header id="header">
+      <h1><a href="/feed">Mindful Yogi</a></h1>
+      <nav class="links">
+        <ul>
+          <li><a href="/tracker">DAILY LOG</a></li>
+          <li><a href="/seq/media">MY MEDIA</a></li>
+          <li><a href="/cal">CALENDAR</a></li>
+          <li><a href="/profile">PROFILE</a></li>
+          <li><a href="/seq">SEQUENCES</a></li>
+          <li><a href="https://alinainch.netlify.app/" target="_blank">FAQ</a></li>
+        </ul>
+      </nav>
+      <nav class="main">
+        <ul>
+          <li>
+            <a class="fa-search">Search</a>
+            <form>
+              <input type="text" id="searchid" name="category" placeholder="Search" />
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
 
-  <!-- Create new Sequence -->
-  <div class="seqForms">
-    <div class="firstSeq">
-    <% for(let j=0; j < sequences.length; j++){ %>
-      <span><a href="/seq/<%=sequences[j]._id%>">
-          <%=sequences[j].title%>
-        </a></span>
-      <form action="/seq/deleteSeq/<%=sequences[j]._id%>?_method=DELETE" method="POST" class="col-3">
-        <button id="seqseq" class="button">Delete</button>
+
+
+
+    <!-- Create new Sequence -->
+    <div class="seqForms">
+      <div class="firstSeq">
+        <% for(let j=0; j < sequences.length; j++){ %>
+          <section>
+            <ul class="trackUl">
+              <li class="track">
+                <article>
+                  
+                    <h1><a href="/seq/<%=sequences[j]._id%>">
+                        <%=sequences[j].title%>
+                      </a></h1>
+                    <form action="/seq/deleteSeq/<%=sequences[j]._id%>?_method=DELETE" method="POST" class="col-3">
+                      <button id="seqseq"  type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    </form>
+                  
+                </article>
+              </li>
+            </ul>
+          </section>
+          <% } %>
+      </div>
+
+      <form action="/seq/newSeq" id="genSeq" method="POST">
+        <input type="text" name="title" id="input" placeholder="New Sequence">
+        <button id="seqseq" type="submit">Add</button>
       </form>
-      <% } %>
+
+      <!-- user input for poses displayed -->
+      <form action="/seq" id="genSeq" method="POST">
+        <select name="posesPerPage" id="">
+          <option <%=posesPerPage==='5' ? 'selected' : '' %> value="5">5</option>
+          <option <%=posesPerPage==='10' ? 'selected' : '' %> value="10">10</option>
+          <option <%=posesPerPage==='15' ? 'selected' : '' %> value="15">15</option>
+          <option <%=posesPerPage==='20' ? 'selected' : '' %> value="20">20</option>
+        </select>
+        <button id="seqseq" type="submit">Generate</button>
+      </form>
     </div>
 
-        <form action="/seq/newSeq" id="genSeq" method="POST">
-          <input type="text" name="title" id="input" placeholder="New Sequence">
-          <button id="seqseq" type="submit">Add</button>
-        </form>
+    <!-- Building a sequence -->
+    <div class="seqPoses">
 
-        <!-- user input for poses displayed -->
-        <form action="/seq" id="genSeq"method="POST">
-          <select name="posesPerPage" id="">
-            <option <%=posesPerPage === '5' ? 'selected' : ''%> value="5">5</option>
-            <option <%=posesPerPage === '10' ? 'selected' : ''%> value="10">10</option>
-            <option <%=posesPerPage === '15' ? 'selected' : ''%> value="15">15</option>
-            <option <%=posesPerPage === '20' ? 'selected' : ''%> value="20">20</option>
-          </select>
-          <button id="seqseq" type="submit">Generate</button>
-        </form>
-  </div>
+      <% for(let i=0; i < allPoses.length; i++){ %>
+        <section class="posesCard">
+          <!-- this is to display to user but not availabile in DB -->
+          <p>
+            <%=allPoses[i].english_name%>
+          </p>
+          <img src="<%=allPoses[i].url_svg%>">
 
-  <!-- Building a sequence -->
-  <div class="seqPoses">
+          <form action="/seq/addPose?_method=PUT" method="POST">
+            <div class="mb-3">
+              <!-- putting it inside the form so we can send it to the DB -->
+              <!-- hide 2 inputs so we can send to backend but user won't see it -->
+              <input id="poseName" class="hide" type="text" name="poseName" value="<%=allPoses[i].english_name%>">
+              <input id="poseImg" class="hide" type="text" name="poseImg" value="<%=allPoses[i].url_svg%>">
 
-    <% for(let i=0; i < allPoses.length; i++){ %>
-      <section class="posesCard">
-        <!-- this is to display to user but not availabile in DB -->
-        <p>
-          <%=allPoses[i].english_name%>
-        </p>
-        <img src="<%=allPoses[i].url_svg%>">
-
-        <form action="/seq/addPose?_method=PUT" method="POST">
-          <div class="mb-3">
-            <!-- putting it inside the form so we can send it to the DB -->
-            <!-- hide 2 inputs so we can send to backend but user won't see it -->
-            <input id="poseName" class="hide" type="text" name="poseName" value="<%=allPoses[i].english_name%>">
-            <input id="poseImg" class="hide" type="text" name="poseImg" value="<%=allPoses[i].url_svg%>">
-
-            <select name="sequences" id="seqID">
-              <option value=""></option>
-              <% for(let j=0; j < sequences.length; j++){ %>
-                <option id="op" value="<%=sequences[j]._id%>">
-                  <%=sequences[j].title%>
-                </option>
-                <% } %>
-            </select>
-            <input type="hidden" name="posesPerPage" value="<%=posesPerPage%>" id="">
-            <button id="seqBtn" type="submit" class="btn btn-primary" value="Upload">+</button>
-          </div>
-        </form>
-      </section>
-      <% } %>
-  </div>
-
-  <div class="seqLinks">
-    <% const numPages= pages < 10 ? pages : 10 %>
-      <% for(let p=1; p <=numPages; p++){ %>
-        <button class="<%=page == p ? 'currentPage' : 'otherPage'%>">
-          <a href="http://localhost:1111/seq?page=<%= p %>&posesPerPage=<%=posesPerPage%>"><%= p %></a>
-        </button>
+              <select name="sequences" id="seqID">
+                <option value=""></option>
+                <% for(let j=0; j < sequences.length; j++){ %>
+                  <option id="op" value="<%=sequences[j]._id%>">
+                    <%=sequences[j].title%>
+                  </option>
+                  <% } %>
+              </select>
+              <input type="hidden" name="posesPerPage" value="<%=posesPerPage%>" id="">
+              <button id="seqBtn" type="submit" class="btn btn-primary" value="Upload">+</button>
+            </div>
+          </form>
+        </section>
         <% } %>
-  </div>
+    </div>
+
+    <div class="seqLinks">
+      <% const numPages=pages < 10 ? pages : 10 %>
+        <% for(let p=1; p <=numPages; p++){ %>
+          <button class="<%=page == p ? 'currentPage' : 'otherPage'%>">
+            <a href="http://localhost:1111/seq?page=<%= p %>&posesPerPage=<%=posesPerPage%>">
+              <%= p %>
+            </a>
+          </button>
+          <% } %>
+    </div>
 
 
 
-  </body>
+</body>
 
-  </html>
+</html>

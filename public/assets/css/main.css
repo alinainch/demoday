@@ -144,6 +144,9 @@ ul.trackUl {
 	margin-left: auto !important;
 	margin-right: auto !important;
 	text-align: center !important;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 
 }
 
@@ -190,6 +193,7 @@ ul.trackUl {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	margin-top: 20px;
 }
 #seqseq{
 	background-color: white !important;

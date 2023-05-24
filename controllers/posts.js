@@ -33,7 +33,14 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id);
       const comments = await Comment.find({postID: req.params.id});
-      res.render("post.ejs", { post: post, user: req.user, comments: comments });
+      const allUsers = await User.find();
+      let userToRender = null
+      for(let i = 0; i < allUsers.length; i++){
+        if(allUsers[i]._id.toString() === post.user.toString()){
+          userToRender = allUsers[i]
+        }
+      }
+      res.render("post.ejs", { post: post, user: req.user, comments: comments, allUsers: allUsers, userToRender: userToRender});
     } catch (err) {
       console.log(err);
     }
