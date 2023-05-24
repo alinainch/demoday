@@ -56,16 +56,15 @@
     <div class="seqForms">
       <div class="firstSeq">
         <% for(let j=0; j < sequences.length; j++){ %>
-          <section>
-            <ul class="trackUl">
-              <li class="track">
+          <section class="oneseq">
+            <!-- <ul class="trackUl">
+              <li class="track"> -->
                 <article>
-                  
                     <h1><a href="/seq/<%=sequences[j]._id%>">
                         <%=sequences[j].title%>
                       </a></h1>
                     <form action="/seq/deleteSeq/<%=sequences[j]._id%>?_method=DELETE" method="POST" class="col-3">
-                      <button id="seqseq"  type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                      <button id="seqseqB"  type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
                     </form>
                   
                 </article>
@@ -82,7 +81,7 @@
 
       <!-- user input for poses displayed -->
       <form action="/seq" id="genSeq" method="POST">
-        <select name="posesPerPage" id="">
+        <select name="posesPerPage" id="white">
           <option <%=posesPerPage==='5' ? 'selected' : '' %> value="5">5</option>
           <option <%=posesPerPage==='10' ? 'selected' : '' %> value="10">10</option>
           <option <%=posesPerPage==='15' ? 'selected' : '' %> value="15">15</option>
