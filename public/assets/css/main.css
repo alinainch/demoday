@@ -29,6 +29,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;}
 
+.currentPage{
+	background-color: rgb(207, 247, 207);
+}
+
 .hide{
 	display: none !important;
 }

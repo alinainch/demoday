@@ -119,9 +119,9 @@
   <div class="seqLinks">
     <% const numPages= pages < 10 ? pages : 10 %>
       <% for(let p=1; p <=numPages; p++){ %>
-        <button><a href="http://localhost:1111/seq?page=<%= p %>&posesPerPage=<%=posesPerPage%>">
-            <%= p %>
-          </a></button>
+        <button class="<%=page == p ? 'currentPage' : 'otherPage'%>">
+          <a href="http://localhost:1111/seq?page=<%= p %>&posesPerPage=<%=posesPerPage%>"><%= p %></a>
+        </button>
         <% } %>
   </div>
 

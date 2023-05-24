@@ -25,7 +25,7 @@ module.exports = {
       const sequences = await Seq.find({ madeBy: req.user.id })
       let page = +req.query.page || 1 
       console.log(page)
-      res.render("seq.ejs", { allPoses: posesObj.slice((page - 1)* posesPerPage, page * posesPerPage ), sequences: sequences, pages: Math.ceil(posesObj.length / posesPerPage), posesPerPage: posesPerPage, yogaObj: null});
+      res.render("seq.ejs", { allPoses: posesObj.slice((page - 1)* posesPerPage, page * posesPerPage ), sequences: sequences, pages: Math.ceil(posesObj.length / posesPerPage), posesPerPage: posesPerPage, yogaObj: null, page: page});
     
     } catch (err) {
       console.log(err);
