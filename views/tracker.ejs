@@ -38,8 +38,8 @@
   
       <% for(let i=0; i<tracker.length; i++) {%>
         <section>
-          <ul class="posts">
-            <li>
+          <ul class="trackUl">
+            <li class="track">
               <article>
                 <header>
                   <h3><%= tracker[i].log.trim()%></h3>
@@ -47,7 +47,8 @@
                   <p><%=user.userName%></p>
                 </header>
                 <a href="single.html" class="image">
-                  <img src="<%user.profilePic%>" alt="" />
+                  <img src="<%tracker[i].user.profilePic%>" alt="" />
+                  <%console.log(tracker[i])%>
                 </a>
                 <!-- Delete Button -->
                 <form action="/tracker/<%=tracker[i]._id%>?_method=DELETE" method="POST">
@@ -59,6 +60,7 @@
         </section>
       <% } %>
 
+     
 
     <% if (user.email) {
       const today = new Date()
@@ -72,6 +74,8 @@
       </form>
     <% } %>
   </div>
+
+ 
 
 </body>
 </html>

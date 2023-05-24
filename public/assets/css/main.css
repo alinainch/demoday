@@ -32,7 +32,89 @@ footer, header, hgroup, menu, nav, section {
 .currentPage{
 	background-color: rgb(207, 247, 207);
 }
+.track{
+	background-color: white;
+	border-radius: 5px;
+	margin: 10px;
+	width: 50%;
+	box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+.trackUl{
+	list-style: none;
+  padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+ul.trackUl {
+	list-style: none;
+	padding: 0;
+}
 
+	ul.trackUl li {
+		border-top: dotted 1px rgba(160, 160, 160, 0.3);
+		margin: 1.5em 0 0 0;
+		padding: 1.5em 0 0 0;
+	}
+
+		ul.trackUl li:first-child {
+			border-top: 0;
+			margin-top: 0;
+			padding-top: 0;
+		}
+
+	ul.trackUl article {
+		display: -moz-flex;
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		-moz-align-items: -moz-flex-start;
+		-webkit-align-items: -webkit-flex-start;
+		-ms-align-items: -ms-flex-start;
+		align-items: flex-start;
+		-moz-flex-direction: row-reverse;
+		-webkit-flex-direction: row-reverse;
+		-ms-flex-direction: row-reverse;
+		flex-direction: row-reverse;
+	}
+
+		ul.trackUl article .image {
+			display: block;
+			margin-right: 1.5em;
+			min-width: 4em;
+			width: 4em;
+		}
+
+			ul.trackUl article .image img {
+				width: 100%;
+			}
+
+		ul.trackUl article header {
+			-moz-flex-grow: 1;
+			-webkit-flex-grow: 1;
+			-ms-flex-grow: 1;
+			flex-grow: 1;
+			-ms-flex: 1;
+		}
+
+			ul.trackUl article header h3 {
+				font-size: 0.7em;
+				margin-top: 0.125em;
+			}
+
+			ul.trackUl article header .published {
+				display: block;
+				font-family: "Raleway", Helvetica, sans-serif;
+				font-size: 0.6em;
+				font-weight: 400;
+				letter-spacing: 0.25em;
+				margin: -0.625em 0 1.7em 0;
+				text-transform: uppercase;
+			}
+
+			ul.trackUl article header > :last-child {
+				margin-bottom: 0;
+			}
 .hide{
 	display: none !important;
 }
@@ -82,10 +164,20 @@ footer, header, hgroup, menu, nav, section {
 .feedbackBtn{
 	width: 10%;
 }
-
+.firstSeq{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+#seqseq{
+	background-color: white !important;
+}
+#genSeq{
+	width: 6.75%;
+}
 #seqBtn{
 	margin-top: 10px;
-	background-color:#f4f4f4;
+	background-color: rgb(207, 247, 207);
 	border:rgba(160, 160, 160, 0.65);
 }
 #mediaInput{
@@ -1978,6 +2070,7 @@ input, select, textarea {
 		text-decoration: none;
 		text-transform: uppercase;
 		white-space: nowrap;
+		background-color: white;
 	}
 
 		input[type="submit"]:hover,

@@ -1,11 +1,11 @@
 const Tracker = require("../models/Tracker")
 const User = require("../models/User")
+const { ObjectID } = require("mongodb");
 
 module.exports = {
   get: async (req, res) => {
     try {
       const posts = await Tracker.find({ user: req.user.id }).sort({ createdAt: "desc" }).lean();
-      
       res.render("tracker.ejs", { tracker: posts, user: req.user});
     } catch (err) {
       console.log(err);
@@ -14,7 +14,7 @@ module.exports = {
   post: async (req, res) => {
     try {
       await Tracker.create({
-        user: req.user.id,
+        user: new ObjectID(req.user.id),
         log: req.body.log,
         date: req.body.date,
         userName: req.user.userName

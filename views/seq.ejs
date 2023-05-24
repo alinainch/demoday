@@ -54,31 +54,31 @@
 
   <!-- Create new Sequence -->
   <div class="seqForms">
-
-
+    <div class="firstSeq">
     <% for(let j=0; j < sequences.length; j++){ %>
       <span><a href="/seq/<%=sequences[j]._id%>">
           <%=sequences[j].title%>
         </a></span>
       <form action="/seq/deleteSeq/<%=sequences[j]._id%>?_method=DELETE" method="POST" class="col-3">
-        <button class="button large">Trash</button>
+        <button id="seqseq" class="button">Delete</button>
       </form>
       <% } %>
+    </div>
 
-        <form action="/seq/newSeq" method="POST">
+        <form action="/seq/newSeq" id="genSeq" method="POST">
           <input type="text" name="title" id="input" placeholder="New Sequence">
-          <button type="submit">Add</button>
+          <button id="seqseq" type="submit">Add</button>
         </form>
 
         <!-- user input for poses displayed -->
-        <form action="/seq" method="POST">
+        <form action="/seq" id="genSeq"method="POST">
           <select name="posesPerPage" id="">
             <option <%=posesPerPage === '5' ? 'selected' : ''%> value="5">5</option>
             <option <%=posesPerPage === '10' ? 'selected' : ''%> value="10">10</option>
             <option <%=posesPerPage === '15' ? 'selected' : ''%> value="15">15</option>
             <option <%=posesPerPage === '20' ? 'selected' : ''%> value="20">20</option>
           </select>
-          <button type="submit">Generate</button>
+          <button id="seqseq" type="submit">Generate</button>
         </form>
   </div>
 
