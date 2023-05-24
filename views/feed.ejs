@@ -21,11 +21,21 @@
 												<% for(let j=0; j < allUsers.length; j++){ %>
 													<img src="<%=allUsers[j].userName === posts[i].userName ? allUsers[j].profilePic : null%>" alt="" />
 												<% } %>
+												<time class="author">
+													<%= posts[i].createdAt.toISOString().split('T')[0] %>
+												</time>
 											</a>
 											
 										</div>
 									</header>
-										<a href="/post/<%= posts[i]._id%>" class="image featured"><img src="<%= posts[i].image%>" alt="" /></a>
+										<a href="/post/<%= posts[i]._id%>" class="image featured"><% if (posts[i].image.endsWith('.mp4') || posts[i].image.endsWith('.avi') || posts[i].image.endsWith('.mov') || posts[i].image.endsWith('.wmv') || posts[i].image.endsWith('.flv') || posts[i].image.endsWith('.mkv') || posts[i].image.endsWith('.mpg') || posts[i].image.endsWith('.mpeg') || posts[i].image.endsWith('.rm') || posts[i].image.endsWith('.rmvb') || posts[i].image.endsWith('.3gp') || posts[i].image.endsWith('.webm')) { %>
+											<video controls>
+												<source src="<%= posts[i].image %>" type="video/mp4">
+												Your browser does not support the video tag.
+											</video>
+										<% } else { %>
+											<img src="<%= posts[i].image %>" alt="Image">
+										<% } %></a>
 										<p><%= posts[i].caption %></p>
 										<footer>
 											<ul class="actions">
