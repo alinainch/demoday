@@ -65,53 +65,57 @@
 
 
 				<footer>
-
+					
 					<ul class="stats">
-
-						<form action="/post/createComment/<%=post.id%>" method="POST">
-							<div class="mb-3">
-
-								<input type="text" class="form-control" id="comment" name="comment">
-								<button type="submit">Add Comment</button>
-							</div>
-						</form>
-						<% for(var i=0; i<comments.length; i++) {%>
-							<li class="col-6 justify-content-between mt-5">
-
-								<p>Made by: <%= user.userName %>
-								</p>
-								<p>
-									<%= comments[i].comment %>
-								</p>
-								<form action="/post/deleteComment/<%= post.id %>/<%= comments[i].id %>?_method=DELETE" method="POST"
-									class="col-3">
-									<button class="button large">Trash</button>
+						
+								<form action="/post/createComment/<%=post.id%>" method="POST">
+									<div class="mb-3">
+										
+										<input type="text" class="form-control" id="comment" name="comment">
+										<button type="submit">Add Comment</button>
+									</div>
 								</form>
-							</li>
-							<% } %>
-								<form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
-									<input class="hide" type="text" name="page" value="feed" hidden>
-									<button class="icon solid fa-heart" type="submit">
-										<%= post.likes %> %>
-									</button>
-									<%let commentCount=comments.filter(x=> x.postID.equals(post._id)).length%>
-
-										<button class="icon solid fa-comment" type="submit">
-
-											<%=commentCount%>
-										</button>
-								</form>
-								<%if(post.user==user.id){ %>
-									<form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
-										<button class="btn btn-primary fa fa-trash">Delete Post</button>
-									</form>
-									<%}%>
-										</li>
-
-										<a class="button large" href="/profile">Return to Profile</a>
-										<a class="button large" href="/feed">Return to Feed</a>
+								<% for(var i=0; i<comments.length; i++) {%>
+									<li class="col-6 justify-content-between mt-5">
+										
+										<p>Made by: <%= user.userName %>
+										</p>
+										<p>
+											<%= comments[i].comment %>
+										</p>
+										<form action="/post/deleteComment/<%= post.id %>/<%= comments[i].id %>?_method=DELETE" method="POST"
+											class="col-3">
+											<button class="button">Delete</button>
+										</form>
+									</li>
+									<% } %>
+										<form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+											<input class="hide" type="text" name="page" value="feed" hidden>
+											<button class="icon solid fa-heart" type="submit">
+												<%= post.likes %> %>
+											</button>
+											<%let commentCount=comments.filter(x=> x.postID.equals(post._id)).length%>
+											
+													<button class="icon solid fa-comment" type="submit">
+														
+														<%=commentCount%>
+													</button>
+										</form>
+										<%if(post.user==user.id){ %>
+											<form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
+												<button class="btn btn-primary fa fa-trash">Delete Post</button>
+											</form>
+											<%}%>
+											</li>
+										
+											<a class="button large" href="/profile">Return to Profile</a>
+											<a class="button large" href="/feed">Return to Feed</a>
 					</ul>
 				</footer>
+			</article>
+
+		</div>
+
 			</article>
 
 		</div>
