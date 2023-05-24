@@ -21,7 +21,7 @@ getPoses()
 module.exports = {
   get: async (req, res) => {
     try {
-      const posesPerPage = req.body.getNum || 5
+      const posesPerPage = req.query.posesPerPage || req.body.posesPerPage || 5
       const sequences = await Seq.find({ madeBy: req.user.id })
       let page = +req.query.page || 1 
       console.log(page)
@@ -97,15 +97,13 @@ module.exports = {
     }
   },
 
-
-
-
-
   addPose: async (req, res) => {
     //users can see all existing sequences 
     //create a new sequence or update a previous one 
     try {
+      console.log('add pose', req.body)
       let poseName = req.body.poseName
+      
       let poseImg = req.body.poseImg
       let sequenceId = req.body.sequences
       let poseID = new ObjectID()
@@ -115,7 +113,7 @@ module.exports = {
             poses: { poseName: poseName, poseImg: poseImg, poseID: poseID }
           }
         });
-      res.redirect('/seq')
+      res.redirect('/seq?posesPerPage='+req.body.posesPerPage)
     } catch (err) {
       console.log(err);
     }

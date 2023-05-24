@@ -69,8 +69,15 @@
           <input type="text" name="title" id="input" placeholder="New Sequence">
           <button type="submit">Add</button>
         </form>
+
+        <!-- user input for poses displayed -->
         <form action="/seq" method="POST">
-          <input type="number"  id="input" name="getNum" value="<%=posesPerPage%>">
+          <select name="posesPerPage" id="">
+            <option <%=posesPerPage === '5' ? 'selected' : ''%> value="5">5</option>
+            <option <%=posesPerPage === '10' ? 'selected' : ''%> value="10">10</option>
+            <option <%=posesPerPage === '15' ? 'selected' : ''%> value="15">15</option>
+            <option <%=posesPerPage === '20' ? 'selected' : ''%> value="20">20</option>
+          </select>
           <button type="submit">Generate</button>
         </form>
   </div>
@@ -101,6 +108,7 @@
                 </option>
                 <% } %>
             </select>
+            <input type="hidden" name="posesPerPage" value="<%=posesPerPage%>" id="">
             <button id="seqBtn" type="submit" class="btn btn-primary" value="Upload">+</button>
           </div>
         </form>
@@ -109,7 +117,7 @@
   </div>
 
   <div class="seqLinks">
-    <% const numPages=pages < 10 ? pages : 10 %>
+    <% const numPages= pages < 10 ? pages : 10 %>
       <% for(let p=1; p <=numPages; p++){ %>
         <button><a href="http://localhost:1111/seq?page=<%= p %>">
             <%= p %>

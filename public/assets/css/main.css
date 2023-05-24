@@ -101,7 +101,7 @@ footer, header, hgroup, menu, nav, section {
 #mediaBod{
 	
 	height: 1800px;
-	background-color: white;
+	background: rgb(250, 242, 231);
 	color: #3c3b3b;
 	margin: 0 0 1em 0;
 }
@@ -189,7 +189,7 @@ input, select, textarea {
 	}
 
 	body {
-		background: #f4f4f4;
+		background: rgb(250, 242, 231);
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
