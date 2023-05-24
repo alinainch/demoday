@@ -1,125 +1,145 @@
 <%- include('partials/header') -%>
 
 
-				<!-- Main -->
-					<div id="main">
+	<!-- Main -->
+	<div id="main">
 
-						<!-- Post -->
-							<% for(let i=0; i < posts.length; i++){ %>
+		<!-- Post -->
+		<% for(let i=0; i < posts.length; i++){ %>
 
-								<article class="post">
-									<header>
-										<div class="title">
-											<h2><a href="/post/<%= posts[i]._id%>"><%= posts[i].title %></a>
-												<!-- posts[i].user is the param id we need to pass in. this is the user id of the person who made the post. go into post model and grab the user (key) id (value) -->
-											</h2>
-										</div>
-										<div class="meta">
-												<a href="/profile/<%= posts[i].user %>" class="author">
-												<span class="name"><%= posts[i].userName %>
-												</span>
-												<% for(let j=0; j < allUsers.length; j++){ %>
-													<img src="<%=allUsers[j].userName === posts[i].userName ? allUsers[j].profilePic : null%>" alt="" />
-												<% } %>
-												<time class="author">
-													<%= posts[i].createdAt.toISOString().split('T')[0] %>
-												</time>
-											</a>
-											
-										</div>
-									</header>
-										<a href="/post/<%= posts[i]._id%>" class="image featured"><% if (posts[i].image.endsWith('.mp4') || posts[i].image.endsWith('.avi') || posts[i].image.endsWith('.mov') || posts[i].image.endsWith('.wmv') || posts[i].image.endsWith('.flv') || posts[i].image.endsWith('.mkv') || posts[i].image.endsWith('.mpg') || posts[i].image.endsWith('.mpeg') || posts[i].image.endsWith('.rm') || posts[i].image.endsWith('.rmvb') || posts[i].image.endsWith('.3gp') || posts[i].image.endsWith('.webm')) { %>
-											<video controls>
-												<source src="<%= posts[i].image %>" type="video/mp4">
-												Your browser does not support the video tag.
-											</video>
-										<% } else { %>
-											<img src="<%= posts[i].image %>" alt="Image">
-										<% } %></a>
-										<p><%= posts[i].caption %></p>
-										<footer>
-											<ul class="actions">
-												<li><a href="/post/<%= posts[i]._id%>" class="button large">See Post</a></li>
-											</ul>
-											<ul class="stats"> 
-												<form
-												class="col-1"
-												action="/post/likePost/<%= posts[i]._id %>?_method=PUT"
-												method="POST"
-												>
-												<input class="hide" type="text" name="page" value="feed" hidden>
-												<button class="icon solid fa-heart" type="submit"><%= posts[i].likes %></button>
-											</form>
-											<%let commentCount = comments.filter(x => x.postID.equals(posts[i]._id)).length%>
-											<li><a href="/post/<%= posts[i]._id%>" class="icon solid fa-comment"></a><%=commentCount%></li>
-											<time class="author"><%= posts[i].createdAt.toISOString().split('T')[0] %></time>
-										</ul>
-									</footer>
-								</article>
-							<% } %>
-
+			<article class="post">
+				<header>
+					<div class="title">
+						<h2><a href="/post/<%= posts[i]._id%>">
+								<%= posts[i].title %>
+							</a>
+							<!-- posts[i].user is the param id we need to pass in. this is the user id of the person who made the post. go into post model and grab the user (key) id (value) -->
+						</h2>
+					</div>
+					<div class="meta">
+						<a href="/profile/<%= posts[i].user %>" class="author">
+							<span class="name">
+								<%= posts[i].userName %>
+							</span>
+							<% for(let j=0; j < allUsers.length; j++){ %>
+								<img src="<%=allUsers[j].userName === posts[i].userName ? allUsers[j].profilePic : null%>" alt="" />
+								<% } %>
+									<time class="author">
+										<%= posts[i].createdAt.toISOString().split('T')[0] %>
+									</time>
+						</a>
 
 					</div>
-
-				<!-- Sidebar -->
-					<section id="sidebar">
-
-						<!-- Intro -->
-							<section id="intro">
-								<a href="#" class="logo"><img src="images/yoga.jpg" alt="" /></a>
-								<header>
-									<h2>Welcome Back</h2>
-									<p>A personal approach to documenting your yoga journey</p>
-								</header>
-							</section>
-
-						
-
-						<!-- Posts List -->
-						<% for(let i=0; i<logs.length; i++) {%>
-							<section>
-								<ul class="posts">
-									<li>
-										<article>
-											<header>
-												<h3><%=logs[i].log%></h3>
-										
-												<p><%=user.userName%></p>
-											</header>
-											<a href="single.html" class="image">
-												<% for(let j=0; j < allUsers.length; j++){ %>
-													<img src="<%=allUsers[j].userName === logs[i].userName ? allUsers[j].profilePic : null%>" alt="" />
-												<% } %>
-											</a>
-										</article>
-									</li>
-								</ul>
-							</section>
-						<% } %>
-
-					
+				</header>
+				<a href="/post/<%= posts[i]._id%>" class="image featured">
+					<% if (posts[i].image.endsWith('.mp4') || posts[i].image.endsWith('.avi') || posts[i].image.endsWith('.mov')
+						|| posts[i].image.endsWith('.wmv') || posts[i].image.endsWith('.flv') || posts[i].image.endsWith('.mkv') ||
+						posts[i].image.endsWith('.mpg') || posts[i].image.endsWith('.mpeg') || posts[i].image.endsWith('.rm') ||
+						posts[i].image.endsWith('.rmvb') || posts[i].image.endsWith('.3gp') || posts[i].image.endsWith('.webm')) {
+						%>
+						<video controls>
+							<source src="<%= posts[i].image %>" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+						<% } else { %>
+							<img src="<%= posts[i].image %>" alt="Image">
+							<% } %>
+				</a>
+				<p>
+					<%= posts[i].caption %>
+				</p>
+				<footer>
+					<ul class="actions">
+						<li><a href="/post/<%= posts[i]._id%>" class="button large">See Post</a></li>
+					</ul>
+					<ul class="scam" >
+						<form action="/post/likePost/<%= posts[i]._id %>?_method=PUT" method="POST">
+							<input class="hide" type="text" name="page" value="feed" hidden>
+							<button class="icon solid fa-heart" type="submit">
+								<%= posts[i].likes %>
+							</button>
+							<%let commentCount=comments.filter(x=> x.postID.equals(posts[i]._id)).length%>
+								<button><a href="/post/<%= posts[i]._id%>" class="icon solid fa-comment"><%=commentCount%></a></button>
+									
 								
-						<!-- Footer -->
-							<section id="footer">
-								<ul class="icons">
-									<li><a href="https://twitter.com/alinainch" target="_blank" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="https://alinainch.netlify.app/" target="_blank" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
-									<li><a href="https://linkedin.com/in/alina-inchaustegui" target="_blank" class="fa-brands fa-linkedin-in">Linkedin</span></a></li>
-									<li><a href="mailto:alinainchaustegui@gmail.com" target="_blank" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-								</ul>
-								<p class="copyright">&copy; Mindful Yogi: <a href="http://html5up.net">Alina Inchaustegui</a>
-							</section>
+						</form>
+						
+					</ul>
+				</footer>
+			</article>
+			<% } %>
 
-					</section>
 
-			</div>
+	</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+	<!-- Sidebar -->
+	<section id="sidebar">
+
+		<!-- Intro -->
+		<section id="intro">
+			<a href="#" class="logo"><img src="images/yoga.jpg" alt="" /></a>
+			<header>
+				<h2>Welcome Back</h2>
+				<p>A personal approach to documenting your yoga journey</p>
+			</header>
+		</section>
+
+
+
+		<!-- Posts List -->
+		<% for(let i=0; i<logs.length; i++) {%>
+			<section>
+				<ul class="posts">
+					<li>
+						<article>
+							<header>
+								<h3>
+									<%=logs[i].log%>
+								</h3>
+
+								<p>
+									<%=user.userName%>
+								</p>
+							</header>
+							<a href="single.html" class="image">
+								<% for(let j=0; j < allUsers.length; j++){ %>
+									<img src="<%=allUsers[j].userName === logs[i].userName ? allUsers[j].profilePic : null%>" alt="" />
+									<% } %>
+							</a>
+						</article>
+					</li>
+				</ul>
+			</section>
+			<% } %>
+
+
+
+				<!-- Footer -->
+				<section id="footer">
+					<ul class="icons">
+						<li><a href="https://twitter.com/alinainch" target="_blank" class="icon brands fa-twitter"><span
+									class="label">Twitter</span></a></li>
+						<li><a href="https://alinainch.netlify.app/" target="_blank" class="icon solid fa-rss"><span
+									class="label">RSS</span></a></li>
+						<li><a href="https://linkedin.com/in/alina-inchaustegui" target="_blank"
+								class="fa-brands fa-linkedin-in">Linkedin</span></a></li>
+						<li><a href="mailto:alinainchaustegui@gmail.com" target="_blank" class="icon solid fa-envelope"><span
+									class="label">Email</span></a></li>
+					</ul>
+					<p class="copyright">&copy; Mindful Yogi: <a href="http://html5up.net">Alina Inchaustegui</a>
+				</section>
+
+	</section>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 
 	</body>
-</html>
+
+	</html>

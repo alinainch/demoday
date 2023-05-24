@@ -72,6 +72,7 @@ ul.trackUl {
 	padding: 0;
 }
 
+
 	ul.trackUl li {
 		border-top: dotted 1px rgba(188, 188, 188, 0.3);
 		margin: 1.5em 0 0 0;
@@ -3059,11 +3060,13 @@ input, select, textarea {
 				cursor: default;
 				list-style: none;
 				padding: 0;
+				background-color: white;
+				
 			}
 
 				.post > footer .stats li {
 					border-left: solid 1px rgba(160, 160, 160, 0.3);
-					display: inline-block;
+					display: flex;
 					font-family: "Raleway", Helvetica, sans-serif;
 					font-size: 0.6em;
 					font-weight: 400;
