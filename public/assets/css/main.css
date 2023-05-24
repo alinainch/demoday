@@ -184,6 +184,7 @@ ul.trackUl {
 }
 .feedbackBtn{
 	width: 10%;
+	background-color: rgb(207, 247, 207);
 }
 .firstSeq{
 	display: flex;
@@ -2162,6 +2163,7 @@ input, select, textarea {
 		input[type="button"].large,
 		button.large,
 		.button.large {
+			background-color: rgb(207, 247, 207);
 			font-size: 0.7em;
 			padding: 0 3em;
 		}

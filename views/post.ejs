@@ -10,7 +10,7 @@
 
 <body class="single is-preload">
 
-	
+
 	<!-- Header -->
 	<header id="header">
 		<h1><a href="/feed">Mindful Yogi</a></h1>
@@ -26,16 +26,16 @@
 		</nav>
 		<nav class="main">
 			<ul>
-					<li>
-							<a class="fa-search">Search</a>
-							<form>
-									<input type="text" id="searchid" name="category" placeholder="Search" />
-							</form>
-					</li>
+				<li>
+					<a class="fa-search">Search</a>
+					<form>
+						<input type="text" id="searchid" name="category" placeholder="Search" />
+					</form>
+				</li>
 			</ul>
-	</nav>
+		</nav>
 	</header>
-	
+
 	<!-- Wrapper -->
 	<div id="wrapper">
 		<!-- Main -->
@@ -53,6 +53,9 @@
 						<a href="#" class="author"><span class="name">
 								<%= post.userName %>
 							</span><img src="<%=user.profilePic%>" alt="" /></a>
+							<time class="author">
+								<%= post.createdAt.toISOString().split('T')[0] %>
+							</time>
 					</div>
 				</header>
 				<span class="image featured"><img src="<%= post.image%>" alt="" /></span>
@@ -62,24 +65,19 @@
 
 
 				<footer>
-					<ul class="actions">
-						<li><a href="/feed" class="button large">Return to Feed</a></li>
-					</ul>
+					
 					<ul class="stats">
-						<%if(post.user==user.id){ %>
-							<form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
-								<button class="btn btn-primary fa fa-trash">Trash</button>
-							</form>
-							<%}%>
+						
 								<form action="/post/createComment/<%=post.id%>" method="POST">
 									<div class="mb-3">
-										<label for="comment" class="form-label">Comment</label>
+										
 										<input type="text" class="form-control" id="comment" name="comment">
 										<button type="submit">Add Comment</button>
 									</div>
 								</form>
 								<% for(var i=0; i<comments.length; i++) {%>
 									<li class="col-6 justify-content-between mt-5">
+										
 										<p>Made by: <%= user.userName %>
 										</p>
 										<p>
@@ -96,17 +94,22 @@
 											<button class="icon solid fa-heart" type="submit">
 												<%= post.likes %> %>
 											</button>
+											<%let commentCount=comments.filter(x=> x.postID.equals(post._id)).length%>
+											
+													<button class="icon solid fa-comment" type="submit">
+														
+														<%=commentCount%>
+													</button>
 										</form>
-
-										<%let commentCount=comments.filter(x=> x.postID.equals(post._id)).length%>
-											<li><a href="#" class="icon solid fa-comment"></a>
-												<%=commentCount%>
+										<%if(post.user==user.id){ %>
+											<form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
+												<button class="btn btn-primary fa fa-trash">Delete Post</button>
+											</form>
+											<%}%>
 											</li>
-											<time class="author">
-												<%= post.createdAt.toISOString().split('T')[0] %>
-											</time>
+										
 											<a class="button large" href="/profile">Return to Profile</a>
-        <a class="button large" href="/feed">Return to Feed</a>
+											<a class="button large" href="/feed">Return to Feed</a>
 					</ul>
 				</footer>
 			</article>
@@ -116,14 +119,16 @@
 		<!-- Footer -->
 		<section id="footer">
 			<ul class="icons">
-				<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-				<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-				<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-				<li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
-				<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+				<li><a href="https://twitter.com/alinainch" target="_blank" class="icon brands fa-twitter"><span
+							class="label">Twitter</span></a></li>
+				<li><a href="https://alinainch.netlify.app/" target="_blank" class="icon solid fa-rss"><span
+							class="label">RSS</span></a></li>
+				<li><a href="https://linkedin.com/in/alina-inchaustegui" target="_blank"
+						class="fa-brands fa-linkedin-in">Linkedin</span></a></li>
+				<li><a href="mailto:alinainchaustegui@gmail.com" target="_blank" class="icon solid fa-envelope"><span
+							class="label">Email</span></a></li>
 			</ul>
-			<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a
-					href="http://unsplash.com">Unsplash</a>.</p>
+			<p class="copyright">&copy; Mindful Yogi: <a href="http://html5up.net">Alina Inchaustegui</a>
 		</section>
 
 	</div>
