@@ -3,7 +3,7 @@ const router = express.Router();
 const calController = require("../controllers/cal");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
-//Tracker
+
 router.get("/", ensureAuth, calController.get);
 
 router.post("/", calController.post);
