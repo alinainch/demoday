@@ -29,6 +29,8 @@
 
 					</div>
 				</header>
+
+				<!-- Conditional for displaying videos in feed -->
 				<a href="/post/<%= posts[i]._id%>" class="image featured">
 					<% if (posts[i].image.endsWith('.mp4') || posts[i].image.endsWith('.avi') || posts[i].image.endsWith('.mov')
 						|| posts[i].image.endsWith('.wmv') || posts[i].image.endsWith('.flv') || posts[i].image.endsWith('.mkv') ||
@@ -46,6 +48,8 @@
 				<p>
 					<%= posts[i].caption %>
 				</p>
+
+				<!-- Footer -->
 				<footer>
 					<ul class="actions">
 						<li><a href="/post/<%= posts[i]._id%>" class="button large">See Post</a></li>
@@ -57,17 +61,12 @@
 								<%= posts[i].likes %>
 							</button>
 							<%let commentCount=comments.filter(x=> x.postID.equals(posts[i]._id)).length%>
-								<button><a href="/post/<%= posts[i]._id%>" class="icon solid fa-comment"><%=commentCount%></a></button>
-									
-								
+								<button><a href="/post/<%= posts[i]._id%>" class="icon solid fa-comment"><%=commentCount%></a></button>	
 						</form>
-						
 					</ul>
 				</footer>
 			</article>
 			<% } %>
-
-
 	</div>
 
 	<!-- Sidebar -->
